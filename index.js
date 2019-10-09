@@ -22,6 +22,7 @@ const typeDefs = require('./graphql/schema');
 const newsResolvers = require('./graphql/resolvers/news');
 const locationResolvers = require('./graphql/resolvers/location');
 const tweetsResolvers = require('./graphql/resolvers/tweets');
+const communesResolvers = require('./graphql/resolvers/communes');
 
 // test
 // const tweets = require('./test')
@@ -50,7 +51,8 @@ const server = new ApolloServer({
   resolvers: merge(
     newsResolvers,
     locationResolvers,
-    tweetsResolvers
+    tweetsResolvers,
+    communesResolvers
   ),
 });
 
