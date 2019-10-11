@@ -84,3 +84,6 @@ mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: tr
 }).catch(err => {
   console.log(err);
 });
+
+// var jsoninput = require('./trash')
+// jsoninput();
