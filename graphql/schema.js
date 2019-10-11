@@ -29,20 +29,7 @@ const typeDefs = gql`
         geometry: GeoShape
     }
 
-    type DepartementProperties {
-        code: String
-        nom: String
-    }
-    type DepartementGeometry {
-        _type: String
-        coordinates: [ [ [ Float ] ] ]
-        coordinatesMulti: [ [ [ [ { type: Number } ] ] ] ]
-    }
-    type Departement {
-        type: String
-        properties: DepartementProperties
-        geometry: DepartementGeometry
-    }
+
 
     type Query {
         communes(code_dept:String): [Communes]
@@ -50,3 +37,18 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+
+    // type DepartementProperties {
+    //     code: String
+    //     nom: String
+    // }
+    // type DepartementGeometry {
+    //     _type: String
+    //     coordinates: [ [ [ Float ] ] ]
+    //     coordinatesMulti: [ [ [ [ { type: Number } ] ] ] ]
+    // }
+    // type Departement {
+    //     type: String
+    //     properties: DepartementProperties
+    //     geometry: DepartementGeometry
+    // }
