@@ -17,6 +17,7 @@ const typeDefs = gql`
         geo_shape: CommuneGeometry
         code_postal: String
         superficie: Float
+        nom_com: String
     }
     type CommuneGeometry {
         _type: String
