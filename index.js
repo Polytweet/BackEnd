@@ -77,6 +77,7 @@ server.applyMiddleware({ app });
 //   console.log('Printing every 30s')
 // })
 
+
 const Commune = require('./model/commune');
 
 // connect to the mongodb database through mongoose and then start the server

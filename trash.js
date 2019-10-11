@@ -1,9 +1,11 @@
 // --------------------------------------------------------------------------------------------
 // Test ajout coordonnées pour map 
 
-const Booking = require('./model/commune');
+const Commune = require('./model/commune');
+const Departement = require('./model/departement')
 
-jsonInput = () => {
+var fs = require("fs");
+module.exports = jsonInput = () => {
   'use strict';
 
   // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result1.json');
@@ -17,50 +19,42 @@ jsonInput = () => {
   // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result9.json');
   // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result10.json');
 
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/fr-communes2016.json');
+  let rawdata = fs.readFileSync('./model/dept.json');
   let communes = JSON.parse(rawdata);
-  communes.forEach(function(element) {
-      // delete element.fields.id_geofla;
-      // delete element.fields.insee_com;
-      // delete element.fields.x_chf_lieu;
-      // delete element.fields.y_chf_lieu;
-      // delete element.fields.y_centroid;
-      // delete element.fields.statut;
-      // delete element.fields.z_moyen;
-      // delete element.fields.x_centroid;
-      // delete element.fields.code_arr;
-      // delete element.record_timestamp;
-      // delete element.datasetid;
-      // delete element.recordid;
-      // console.log('test '+element.fields.geo_shape.coordinates);
-      let com = new Commune({
-        fields: {
-          nom_dept: element.fields.nom_dept,
-          population: element.fields.population,
-          code_reg: element.fields.code_reg,
-          nom_reg: element.fields.nom_reg,
-          geo_point_2d: element.fields.geo_point_2d,
-          code_dept: element.fields.code_dept,
-          code_com: element.fields.code_com,
-          geo_shape: {
-            _type: element.fields.geo_shape.type,
-            coordinates: element.fields.geo_shape.coordinates
-          },
-          code_postal: element.fields.code_postal,
-          superficie: element.fields.superficie,
-          nom_com: element.fields.nom_com
+  communes.features.forEach(function(element) {
+    var dept;
+    if(element.geometry.type == 'MultiPolygon') {
+      dept = new Departement({
+        _type: element.type,
+        properties: {
+          code: element.properties.code,
+          nom: element.properties.nom
+        },
+        geometry: {
+          _type: element.geometry.type,
+          coordinatesMulti: element.geometry.coordinates
+        }
+      })
+    } else {
+      dept = new Departement({
+        _type: element.type,
+        properties: {
+          code: element.properties.code,
+          nom: element.properties.nom
         },
         geometry: {
           _type: element.geometry.type,
           coordinates: element.geometry.coordinates
         }
       })
-      com.save();
-      // console.log('-------------------')
+    }
+       
+      dept.save(); 
+      // console.log(element.geometry.type)
+      // console.log(element.geometry.coordinates)
   }, this);
 }
-
-// jsonObject = jsonInput();
+// jsonInput()
 
 
 
