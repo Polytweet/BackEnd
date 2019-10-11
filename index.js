@@ -5,6 +5,11 @@ const express = require('express');
 // database import
 const mongoose = require('mongoose');
 const fs = require('fs');
+//const NewsAPI = require('newsapi');
+
+const news = require('./news')
+news()
+
 
 // socket import
 // const socketio = require('socket.io')
