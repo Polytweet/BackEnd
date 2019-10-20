@@ -2,6 +2,14 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
 
+    type News {
+        title: String,
+        description: String,
+        url: String,
+        date: String,
+        content: String
+    }
+
     type GeoShape {
         _type: String
         coordinates: [ [ [ Float ] ] ]
@@ -29,11 +37,14 @@ const typeDefs = gql`
         geometry: GeoShape
     }
 
-
-
     type Query {
         communes(code_dept:String): [Communes]
+        news : [News]
     }
+
+    type Mutation {
+        addNews(title: String, description: String, url: String, date: String, content: String) :News
+      }
 `;
 
 module.exports = typeDefs;

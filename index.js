@@ -5,10 +5,9 @@ const express = require('express');
 // database import
 const mongoose = require('mongoose');
 const fs = require('fs');
-//const NewsAPI = require('newsapi');
 
 const news = require('./news')
-news()
+
 
 
 // socket import
@@ -79,9 +78,10 @@ server.applyMiddleware({ app });
 
 
 const Commune = require('./model/commune');
+const News = require('./model/news');
 
 // connect to the mongodb database through mongoose and then start the server
-mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+var db = mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   app.listen({ port: 4000 }, () => {
     console.log(`API ready at http://polytweet.fr${apiPath}`)
     console.log(`Client ready at http://polytweet.fr`)
@@ -90,3 +90,6 @@ mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: tr
 }).catch(err => {
   console.log(err);
 });
+
+// Updating of news in the database
+news();
