@@ -3,14 +3,16 @@ const fs = require('fs');
 const Schema = mongoose.Schema;
 
 const news = new Schema({
-
-    fields: {
-        title: String,
-        description: String,
-        url: String,
-        date: String,
-        content: String
-    }
+    title: String,
+    description: String,
+    url: String,
+    date: String,
+    content: String,
+    // var: {
+    //     type: String,
+    //     required: true,
+    //     default: 'var'
+    // },
 });
 
 module.exports = mongoose.model('News', news);

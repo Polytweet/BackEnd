@@ -1,0 +1,319 @@
+[{ status: 'ok',
+    totalResults: 34,
+    articles: [
+        { source: [Object
+            ],
+         author: 'Sud Ouest',
+         title:
+          'Bordeaux : une femme tuée d’un coup de couteau, un homme recherché - Sud Ouest',
+         description:
+          'Une femme d’une trentaine d’années est décédée sur un palier de porte dans le quartier de Grand Parc à Bordeaux',
+         url:
+          'https: //www.sudouest.fr/2019/10/21/bordeaux-une-femme-tuee-d-un-coup-de-couteau-a-bordeaux-un-homme-recherche-6729592-2780.php',
+         urlToImage:
+          'https: //images.sudouest.fr/2019/10/21/5dade4f866a4bd87412b6f74/golden/une-femme-dune-trentaine-dannees-est-decedee-sur-un-palier-de-porte-dans-le-quartier-de-grand-parc-a-bordeaux.jpg?v1',
+         publishedAt: '2019-10-21T17: 01: 55Z',
+         content:
+          'Elle n’a pas survécu à ses blessures. Une femme d’une trentaine d’années est décédée ce lundi après midi dans le quartier du Grand parc à Bordeaux. Grièvement blessée, elle est parvenue à descendre un étage de son immeuble avant de s’effondrer.\r\nEn l’absence … [+556 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: null,
+         title:
+          'Enquête pour « enlèvement » après la disparition de Gérald Thomassin - Blog Le Monde',
+         description:
+          'Accusé du meurtre d’une postière, l’ancien acteur de 45 ans s’est volatilisé la veille d’une convocation judiciaire à Lyon.',
+         url:
+          'https: //www.lemonde.fr/societe/article/2019/10/21/enquete-pour-enlevement-apres-la-disparition-de-gerald-thomassin_6016363_3224.html',
+         urlToImage:
+          'https: //img.lemde.fr/2019/10/21/308/0/4504/2252/1440/720/60/0/0809d3e_Vk0FWrKu7nLOypEI1n9qETux.jpg',
+         publishedAt: '2019-10-21T16: 57: 32Z',
+         content:
+          'Montréal-la-Cluse, près dOyonnax, où a été tuée une postière en décembre 2008. PHILIPPE DESMAZES / AFP\r\nDe lacteur principal du film Le Petit Criminel au principal suspect dun meurtre. Lancien acteur Gérald Thomassin a disparu fin août, la veille dune convoca… [+3092 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: null,
+         title:
+          'Un ex-ministre burundais et sa femme condamnés pour avoir exploité un homme à leur domicile des Hauts-de-Seine - Blog Le Monde',
+         description:
+          'Gabriel et Candide Mpozagara ont été condamnés lundi à deux ans de prison avec sursis pour avoir forcé un de leurs compatriotes à travailler dix-neuf heures par jour.',
+         url:
+          'https: //www.lemonde.fr/societe/article/2019/10/21/un-ex-ministre-burundais-et-sa-femme-reconnus-coupables-d-avoir-exploite-pendant-dix-ans-un-homme-a-leur-domicile_6016362_3224.html',
+         urlToImage:
+          'https: //img.lemde.fr/2019/10/21/0/0/5385/2689/1440/720/60/0/f80f679_jqdDMZK8F5hKjDEyXXeXiaDV.jpg',
+         publishedAt: '2019-10-21T16: 33: 28Z',
+         content:
+          'Deux ans de prison avec sursis et 70 000 euros de dommages et intérêts pour avoir exploité pendant dix ans un homme à leur domicile de Ville-dAvray (Hauts-de-Seine). Le tribunal correctionnel de Nanterre a condamné Gabriel Mpozagara, ancien ministre au Burund… [+2346 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'par Philippe Richard',
+         title:
+          'Ils émettent trop d\'ondes : les experts invitent à ne pas garder certains smartphones dans la poche - Ouest-France',
+         description:
+          'De nombreux téléphones mobiles antérieurs à 2016 présentent des niveaux d’exposition trop élevés quand ils sont portés près du corps, prévient l’Agence nationale de sécurité sanitaire Anses. Il n’y a pas de « risque avéré pour la santé », mais les autorités s…',
+         url:
+          'https: //www.ouest-france.fr/sante/ils-emettent-trop-d-ondes-les-experts-invitent-ne-pas-garder-certains-smartphones-dans-la-poche-6575381',
+         urlToImage:
+          'https: //media.ouest-france.fr/v1/pictures/MjAxOTEwNTgzNjc3ZjgwMzk4YTA0ZGQzMzc1YmU3OWFlMjY0OGU?width=1260&height=712&focuspoint=50%2C24&cropresize=1&client_id=bpeditorial&sign=0aa7f165c74453e9a55b833a202699ed7f407ef9cc91358a70ed4a6ff3e92889',
+         publishedAt: '2019-10-21T16: 09: 00Z',
+         content:
+          'De nombreux téléphones mobiles antérieurs à 2016 présentent des niveaux dexposition trop élevés quand ils sont portés près du corps, prévient lAgence nationale de sécurité sanitaire Anses. Il ny a pas de «risque avéré pour la santé », mais les autorités sanit… [+2115 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: null,
+         title:
+          'Labo – Google Pixel 4 : encore des progrès en photo en basse lumière - Les Numériques',
+         description: null,
+         url:
+          'https: //www.lesnumeriques.com/telephone-portable/labo-google-pixel-4-encore-des-progres-en-photo-en-basse-lumiere-n142327.html',
+         urlToImage: null,
+         publishedAt: '2019-10-21T16: 00: 00Z',
+         content: null
+        },
+        { source: [Object
+            ],
+         author: null,
+         title:
+          'Brexit : le Parlement britannique repousse de nouveau le vote sur l\'accord - Le Monde',
+         description:
+          'Le président de la Chambre des communes souhaite que les élus finissent d’abord d’examiner le texte sur les modalités d’application de l’accord.',
+         url:
+          'https: //www.lemonde.fr/international/article/2019/10/21/le-parlement-britannique-ne-votera-pas-l-accord-de-brexit-lundi_6016356_3210.html',
+         urlToImage:
+          'https: //img.lemde.fr/2019/10/21/199/0/5184/2592/1440/720/60/0/0ec5b2c_5877033-01-06.jpg',
+         publishedAt: '2019-10-21T15: 50: 35Z',
+         content:
+          'John Bercow a dit non a un nouveau vote lundi 21 octobre sur laccord de Brexit. HO / AFP\r\n« La motion ne sera pas débattue. » Le président de la Chambre des communes britannique, John Bercow, a refusé de soumettre au vote des députés lundi 21 octobre laccord … [+3784 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'Ingrid Zerbib',
+         title:
+          'VIDEO. Coup de coude, coup de boule, coup de pied… Avant Vahaamahina ces sportifs ont aussi pété un plomb - 20 Minutes',
+         description:
+          'Le coup de coude de Sébastien Vahaamahina au mondial de rugby a fait basculer la rencontre face au Pays de Galles. D’autres sportifs ont eu des coups de sang mémorables.',
+         url:
+          'https: //www.20minutes.fr/sport/2633283-20191021-video-coup-coude-coup-boule-coup-pied-avant-vahaamahina-sportifs-aussi-pete-plomb',
+         urlToImage:
+          'https: //img.20mn.fr/upW8ivTPSSK-kR7EH2kKEg/648x360_francais-sebastien-vahaamahina-donne-coup-coude-gallois-aaron-wainwright-mondial-rugby-japon.jpg',
+         publishedAt: '2019-10-21T15: 41: 32Z',
+         content:
+          'Le français Sébastien Vahaamahina donne un coup de coude au gallois Aaron Wainwright au mondial de rugby au Japon. Aaron Favila/AP/SIPA\r\nUn coude du sort. Lors du quart de finale de la Coupe du monde de rugby qui se joue au Japon, le français Sébastien Vahaam… [+1121 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: null,
+         title:
+          'Oise : un enfant meurt en tombant du 10e étage d\'un immeuble - RTL.fr',
+         description:
+          'La maman de l\'enfant était partie faire des courses. L\'enfant de quatre ans est décédé à l\'hôpital.',
+         url:
+          'https: //www.rtl.fr/actu/justice-faits-divers/oise-un-enfant-meurt-en-tombant-du-10eme-etage-d-un-immeuble-7799296687',
+         urlToImage:
+          'https: //cdn-media.rtl.fr/cache/_LNx0KU2biC3TkvmtMH6hA/2000v1333-0/online/image/2019/1021/7799296817_l-entree-de-l-hopital-de-creil-oise.jpg',
+         publishedAt: '2019-10-21T15: 11: 00Z',
+         content:
+          'Elle assure avoir barricadé ses fenêtres et fermé la porte à clé. Pourtant, les précautions prises par cette habitante de Creil (Oise) n\'ont pas suffi. Son enfant de 4 ans est décédé après une chute de leur appartement situé au 10e étage d\'une tour d\'immeuble… [+668 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'Manon Aublanc',
+         title:
+          'Droit de retrait à la SNCF : Derrière la mobilisation des cheminots, la question de la sécurité dans les… - 20 Minutes',
+         description:
+          'Après l’accident de TER, les syndicats de cheminots pointent du doigt « l’équipement agent seul », un dispositif qui permet de faire circuler les trains sans contrôleur',
+         url:
+          'https: //www.20minutes.fr/societe/2633027-20191021-droit-retrait-sncf-derriere-mobilisation-cheminots-question-securite-trains',
+         urlToImage:
+          'https: //img.20mn.fr/lkyelF8aSrOac7b-gPW8Fg/648x360_un-ter-sur-une-voie-sncf-en-region-midi-pyrenees.jpg',
+         publishedAt: '2019-10-21T14: 50: 38Z',
+         content:
+          'Un TER sur une voie SNCF en région Midi-Pyrénées. Frédéric Scheiber/20MINUTES\r\nAprès quatre jours dun bras de fer entre les syndicats de \r\ncheminots et la direction de la SNCF autour du « droit de retrait », \r\nle trafic ferroviaire sest nettement amélioré ce … [+5238 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'BFMTV',
+         title:
+          'Scènes d\'émeutes, pillages et déploiement militaire: pourquoi le Chili s\'embrase-t-il? - BFMTV.COM',
+         description:
+          'La colère populaire s\'est emparée du Chili depuis plusieurs jours. Ce week-end, le pouvoir a répondu aux manifestation par un déploiement militaire et un l\'instauration d\'un couvre-feu. Un tour de vis qui ne répond pas à une détresse sociale, économique et po…',
+         url:
+          'https: //www.bfmtv.com/international/scenes-d-emeutes-pillages-et-deploiement-militaire-pourquoi-le-chili-s-embrase-t-il-1791289.html',
+         urlToImage:
+          'https: //www.bfmtv.com/i/0/0/ebc/5a775edb2718fc6731fbed2ba6bd1.jpg',
+         publishedAt: '2019-10-21T14: 48: 00Z',
+         content: null
+        },
+        { source: [Object
+            ],
+         author: null,
+         title:
+          'Bruges/PSG - Clement "Un plus grand défi que le Real Madrid...gagner serait un miracle" - Parisfans.fr',
+         description:
+          'Philippe Clement, entraîneur du Club Bruges, était en conférence de presse ce lundi afin d’évoquer la réception du Paris Saint-Germain demain soir au Stade Jan-Breydel dans le cadre de la 3e journée de la phase de groupe de la Ligue des Champions (coup d’envo…',
+         url:
+          'http: //www.parisfans.fr/autour-du-psg/bruges-psg-clement-un-plus-grand-defi-que-le-real-madrid-gagner-serait-un-miracle-425767.html',
+         urlToImage:
+          'http: //www.parisfans.fr/wp-content/uploads/2019/10/Clement.png',
+         publishedAt: '2019-10-21T14: 25: 00Z',
+         content:
+          'Philippe Clement, entraîneur du Club Bruges, était en conférence de presse ce lundi afin d’évoquer la réception du Paris Saint-Germain demain soir au Stade Jan-Breydel dans le cadre de la 3e journée de la phase de groupe de la Ligue des Champions (coup d’envo… [+1414 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'Cassim Ketfi',
+         title:
+          'Prise en main du Microsoft Surface Laptop 3 : sur le bon chemin - FrAndroid',
+         description:
+          'Microsoft nous a invités à un événement où nous avons pu prendre en main la nouvelle gamme Surface et notamment le Surface Laptop 3. Microsoft France a organisé un événement où la firme a pu revenir sur l’annonce du Surface Duo, et durant lequel nous avons pu…',
+         url:
+          'https: //www.frandroid.com/marques/microsoft/633391_prise-en-main-du-microsoft-surface-laptop-3',
+         urlToImage:
+          'https: //images.frandroid.com/wp-content/uploads/2019/10/c_microsoft-surface-laptop-3-frandroid-dsc03144-1200x800.jpg',
+         publishedAt: '2019-10-21T13: 55: 27Z',
+         content:
+          'Microsoft nous a invités à un événement où nous avons pu prendre en main la nouvelle gamme Surface et notamment le Surface Laptop 3.\r\nMicrosoft France a organisé un événement où la firme a pu revenir sur lannonce du Surface Duo, et durant lequel nous avons pu… [+3231 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'https: //www.facebook.com/orangeactufr',
+         title:
+          'Nouveaux réacteurs nucléaires : Elisabeth Borne recadre le PDG d\'EDF et demande des explications - Actu Orange',
+         description:
+          '"Ce n\'est pas EDF qui fixe la politique énergétique du pays", a lancé la ministre de la Transition écologique en réponse aux projets de construction de nouvelles centrales nucléaires avancés par le patron du groupe français.\n\nLe gouvernement, par la voix d\'El…',
+         url:
+          'https: //actu.orange.fr/france/nouveaux-reacteurs-nucleaires-elisabeth-borne-recadre-le-pdg-d-edf-et-demande-des-explications-magic-CNT000001knio9.html',
+         urlToImage:
+          'http: //media2.woopic.com/api/v1/images/661%2Fmagic-article-actu%2F5c0%2F56f%2F3d5b5e4c74ec6a7bc56d235975%2Fnouveaux-reacteurs-nucleaires-elisabeth-borne-recadre-le-pdg-d-edf-et-demande-des-explications%7C5c056f3d5b5e4c74ec6a7bc56d235975.jpg?format=470x264&facedetect=1&quality=85',
+         publishedAt: '2019-10-21T13: 50: 00Z',
+         content:
+          'Orange avec AFP-Services, publié le lundi 21 octobre 2019 à 15h50\r\n"Ce n\'est pas EDF qui fixe la politique énergétique du pays", a lancé la ministre de la Transition écologique en réponse aux projets de construction de nouvelles centrales nucléaires avancés p… [+2240 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'Léa Bodin',
+         title:
+          'Marvel : James Gunn (Les Gardiens de la Galaxie) répond aux attaques de Coppola - AlloCiné',
+         description:
+          'Après avoir commenté les attaques de Martin Scorsese contre les films Marvel, James Gunn répond à Francis Ford Coppola.',
+         url:
+          'http: //www.allocine.fr/article/fichearticle_gen_carticle=18685132.html',
+         urlToImage:
+          'http: //fr.web.img2.acsta.net/newsv7/19/10/21/15/40/5842486.jpg',
+         publishedAt: '2019-10-21T13: 45: 00Z',
+         content:
+          'Après avoir commenté les attaques de Martin Scorsese contre les films Marvel, James Gunn répond à Francis Ford Coppola.AGENCE / BESTIMAGE\r\nLa polémique autour des films Marvel bat son plein. Présent à Lyon pour recevoir le Prix Lumière, Francis Ford Coppola n… [+1827 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: null,
+         title:
+          'Les troupes américaines poursuivent leur retrait du nord de la Syrie vers l\'Irak voisin - Le Monde',
+         description:
+          'Au départ de ce convoi des forces américaines, les Kurdes de Syrie ont manifesté leur mécontentement en brandissant des pancartes accusant le président Donald Trump de les avoir trahis.',
+         url:
+          'https: //www.lemonde.fr/international/article/2019/10/21/les-troupes-americaines-poursuivent-leur-retrait-du-nord-de-la-syrie-vers-l-irak-voisin_6016338_3210.html',
+         urlToImage:
+          'https: //img.lemde.fr/2019/10/21/255/0/5945/2972/1440/720/60/0/5688542_5875521-01-06.jpg',
+         publishedAt: '2019-10-21T13: 31: 37Z',
+         content:
+          'Des véhicules blindés américains arrivent dans la ville de Bardarash, dans le Kurdistan irakien, lundi 21 octobre. SAFIN HAMED / AFP\r\nUn convoi de larmée américaine dune centaine de véhicules jusquici stationnés en Syrie a pénétré, lundi 21 octobre, dans le n… [+4781 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'Sud Ouest',
+         title:
+          'Aéroport de Bordeaux : Ryanair proposera 37 destinations depuis Mérignac à l’été 2020 - Sud Ouest',
+         description:
+          'La compagnie low cost irlandaise a présenté son programme été 2020 au départ de l\'aéroport de Bordeaux avec 37 lignes dont neuf nouveautés.',
+         url:
+          'https: //www.sudouest.fr/2019/10/21/ryanair-proposera-37-destinations-depuis-bordeaux-a-l-ete-2020-6728852-2780.php',
+         urlToImage:
+          'https: //images.sudouest.fr/2019/10/21/5dadb6de66a4bdd96b2b6f79/golden/ryanair-desservira-notamment-agadir-et-thessalonique-a-l-ete-2020.jpg',
+         publishedAt: '2019-10-21T13: 26: 10Z',
+         content:
+          'La compagnie low cost Ryanair vient de dévoiler son programme d’été 2020 à Bordeaux avec 37 destinations au total.\r\nSept nouvelles liaisons estivales seront proposées à raison de deux vols par semaine : vers Budapest (Hongrie), Nador (Maroc), Oujda (Maroc), P… [+672 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'avec AFP',
+         title:
+          'La 5G est-elle dangereuse pour votre santé ? - Ouest-France',
+         description:
+          'La 5G est-elle dangereuse pour la santé ? La question monte, et les inquiétudes aussi, au fur et à mesure du déploiement de cette nouvelle technologie de téléphonie mobile dans le monde.',
+         url:
+          'https: //www.ouest-france.fr/sante/la-5g-est-elle-dangereuse-pour-votre-sante-6575222',
+         urlToImage:
+          'https: //media.ouest-france.fr/v1/pictures/MjAxOTEwNTlmZTk1ZGYwNjY3ZTkyYzUxNWEwZDg1NjdlODBiYTU?width=1260&height=712&focuspoint=50%2C25&cropresize=1&client_id=bpeditorial&sign=2937ca869e26e54ba28220533b5ce44cdc35ba214a6edaf023a8403f16bee26c',
+         publishedAt: '2019-10-21T13: 17: 00Z',
+         content:
+          'La 5G est-elle dangereuse pour la santé? La question monte, et les inquiétudes aussi, au fur et à mesure du déploiement de cette nouvelle technologie de téléphonie mobile dans le monde.\r\nLa 5G serait-elle dangereuse pour votre santé? Alors que le déploiement … [+6169 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'Le Figaro avec AFP',
+         title:
+          'Des policiers blessés lors d\'une émeute dans un centre pour migrants - Le Figaro',
+         description: null,
+         url:
+          'http: //www.lefigaro.fr/flash-actu/des-policiers-blesses-lors-d-une-emeute-dans-un-centre-pour-migrants-20191021',
+         urlToImage:
+          'https: //www.lefigaro.fr/static/favicon/android-chrome-192x192.png',
+         publishedAt: '2019-10-21T13: 10: 00Z',
+         content:
+          'Deux policiers ont été blessés et des voitures incendiées au cours d\'une émeute dans un centre pour migrants à Malte, près de La Valette, dans la nuit de dimanche à lundi, ont annoncé les autorités.\r\nLa bagarre à laquelle ont participé une centaine de migrant… [+891 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: 'Mathilde Ceilles',
+         title:
+          'Var : Une deuxième personne infectée par le virus Zika diagnostiquée - 20 Minutes',
+         description:
+          'Une deuxième personne a été infectée par le virus Zika dans le Var, quelques semaines après le diagnostic d’un premier cas autochtone dans le département',
+         url:
+          'https: //www.20minutes.fr/sante/2633139-20191021-var-deuxieme-personne-infectee-virus-zika-diagnostique',
+         urlToImage:
+          'https: //img.20mn.fr/bXPoHxbmSHWa7PaUDO2MIw/648x360_virus-zika-transmis-moustiques.jpg',
+         publishedAt: '2019-10-21T13: 05: 33Z',
+         content:
+          'Le virus Zika est transmis par les moustiques. Jim Damaske/AP/SIPA\r\nDeux personnes infectées en seulement quelques semaines, dans un même département. Dans un communiqué de presse, lagence régionale de santé (ARS) de Provence-Alpes Côte d\'Azur annonce quune s… [+1531 chars
+            ]'
+        },
+        { source: [Object
+            ],
+         author: null,
+         title:
+          'Bali : un Français risque la peine de mort pour trafic de drogue - Le Parisien',
+         description:
+          'Le Français, Olivier Jover, a été arrêté après la découverte à l’aéroport d’un paquet contenant 22,
+            5 grammes de cocaïne, envoyé depuis son p',
+         url:
+          'http: //www.leparisien.fr/faits-divers/bali-un-francais-et-deux-thailandaises-risquent-la-peine-de-mort-pour-trafic-de-drogue-21-10-2019-8177160.php',
+         urlToImage:
+          'https: //arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/57HMNWQTQHB2AZKJM2XSF7USTQ.jpg',
+         publishedAt: '2019-10-21T11: 50: 00Z',
+         content:
+          'Un Français et deux Thaïlandaises risquent la peine de mort après avoir été arrêtés pour trafic de drogue à Bali, ont annoncé lundi les services douaniers de l\'île touristique indonésienne.\r\nLe Français, Olivier Jover, a été arrêté après la découverte à l\'aér… [+1826 chars
+            ]'
+        }
+    ]
+}]
