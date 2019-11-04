@@ -1,8 +1,11 @@
 const { gql } = require('apollo-server');
 
+
 const typeDefs = gql`
 
     type News {
+        source : String,
+        author : String,
         title: String,
         description: String,
         url: String,
@@ -40,12 +43,8 @@ const typeDefs = gql`
     type Query {
         communes(code_dept:String): [Communes]
         news : [News]
-    }
-
-    type Mutation {
-        addNews(title: String, description: String, url: String, date: String, content: String) :News
-      }
-`;
+    }`
+;
 
 module.exports = typeDefs;
 
