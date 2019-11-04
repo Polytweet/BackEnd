@@ -76,6 +76,10 @@ server.applyMiddleware({ app });
 //   console.log('Printing every 30s')
 // })
 
+schedule.scheduleJob('0 0 * * * *', function(){
+  news();
+});
+
 
 const Commune = require('./model/commune');
 const News = require('./model/news');
@@ -90,6 +94,3 @@ var db = mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlP
 }).catch(err => {
   console.log(err);
 });
-
-// Updating of news in the database
-news();

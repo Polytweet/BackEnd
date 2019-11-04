@@ -8,7 +8,7 @@ const News = require('./model/news')
 module.exports = async function refreshNewsData() {
 
   try {
-    console.log(await findAllNewsInDB());
+    //console.log(await findAllNewsInDB());
     getNewsFromNewsAPI()
       .then(function (response) {
         splitData(response)
@@ -19,13 +19,13 @@ module.exports = async function refreshNewsData() {
               {
                 if (response['result'] == '')
                 {
-                  console.log('non existant dans la db, il faut l ajouter');
+                  //console.log('non existant dans la db, il faut l ajouter');
                   //console.log(response['data']);
-                  //saveNewsInDB(response['data']['source'], response['data']['author'], response['data']['title'], response['data']['description'], response['data']['url'], response['data']['date'], response['data']['content']);
+                  saveNewsInDB(response['data']['source'], response['data']['author'], response['data']['title'], response['data']['description'], response['data']['url'], response['data']['date'], response['data']['content']);
                 }
                 else
                 {
-                  console.log('cette news existe déjà dans la db, il ne faut plus l ajouter');
+                  //console.log('cette news existe déjà dans la db, il ne faut plus l ajouter');
                  // console.log(dataToAdd);
                 }
               })
