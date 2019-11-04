@@ -9,9 +9,9 @@ const departement = new Schema({
         nom: String
     },
     geometry: {
-    _type: String,
-    coordinates: [ [ [ { type: Number } ] ] ],
-    coordinatesMulti: [ [ [ [ { type: Number } ] ] ] ]
+        _type: String,
+        coordinates: [ [ [ { type: Number } ] ] ],
+        coordinatesMulti: [ [ [ [ { type: Number } ] ] ] ]
     }
 });
 

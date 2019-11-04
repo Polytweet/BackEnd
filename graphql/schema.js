@@ -13,6 +13,7 @@ const typeDefs = gql`
     type GeoShape {
         _type: String
         coordinates: [ [ [ Float ] ] ]
+        coordinatesMulti: [ [ [ [ Float ] ] ] ]
     }
     type CommuneFields {
         nom_dept: String
@@ -37,8 +38,19 @@ const typeDefs = gql`
         geometry: GeoShape
     }
 
+    type Properties {
+        code: String
+        nom: String
+    }
+    type Departement {
+        type: String
+        properties: Properties
+        geometry: GeoShape
+    }
+
     type Query {
         communes(code_dept:String): [Communes]
+        departements: [Departement]
         news : [News]
     }
 
