@@ -8,6 +8,8 @@ const fs = require('fs');
 
 const news = require('./news')
 
+const clearDB = require('./clearDB');
+
 
 
 // socket import
@@ -79,6 +81,7 @@ server.applyMiddleware({ app });
 schedule.scheduleJob('0 0 * * * *', function(){
   news();
 });
+
 
 
 const Commune = require('./model/commune');

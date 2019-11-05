@@ -3,13 +3,15 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
 
+    scalar Date
+
     type News {
         source : String,
         author : String,
         title: String,
         description: String,
         url: String,
-        date: String,
+        date: Date,
         content: String
     }
 
