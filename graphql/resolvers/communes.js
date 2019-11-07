@@ -12,7 +12,7 @@ module.exports = {
             fields: {
               nom_dept: commune.fields.nom_dept,
               population: commune.fields.population,
-              code_reg: commune.fields.population,
+              code_reg: commune.fields.code_reg,
               nom_reg: commune.fields.nom_reg,
               geo_point_2d: commune.fields.geo_point_2d,
               code_dept: commune.fields.code_dept,

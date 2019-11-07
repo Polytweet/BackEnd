@@ -13,7 +13,8 @@ const commune = new Schema({
     code_com: String,
     geo_shape: {
         _type: String,
-        coordinates: [ [ [ { type: Number } ] ] ]
+        coordinates: [ [ [ { type: Number } ] ] ],
+        coordinatesMulti: [ [ [ [ { type: Number } ] ] ] ]
     },
     code_postal: String,
     superficie: Number,
