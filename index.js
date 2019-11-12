@@ -102,3 +102,11 @@ var db = mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlP
 // const addDepartements = require('./trash')
 // addDepartements();
 // addCommunes();
+
+// TWEETS API //
+
+    var StartTweetStream = require('./tweets.js');
+    var boundingBox = [ '-5.03', '42.28', '8.41', '51.19' ];
+    StartTweetStream(boundingBox);
+	
+// END //
