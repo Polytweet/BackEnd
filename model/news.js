@@ -8,7 +8,7 @@ const news = new Schema({
     title: String,
     description: String,
     url: String,
-    date: String,
+    date: Date,
     content: String,
     // var: {
     //     type: String,

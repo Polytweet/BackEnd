@@ -4,9 +4,61 @@ var fs = require('fs');
 var request = require('request');
 const mongoose = require('mongoose');
 const News = require('./model/news');
+const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = async function clearDataBase() {
-    let newsInDB = await News.find({});
-    console.log("HOLA");
+    // let newsInDB = await News.find({});
+    // console.log("HOLA");
+    // let now = new Date();
+    // //console.log(now);
+    // let numbersNews = await News.count({});
+    // console.log(numbersNews);
+    // for (let i = 0; i < numbersNews; i++) {
+    //     //console.log(i);
+    //     //console.log(newsInDB[i]['date']);
+    //     let truc = new Date(now - newsInDB[i]['date']);
+    //     var time_diff = now.getTime() - newsInDB[i]['date'].getTime();
+    //     var days_Diff = time_diff / (1000 * 3600 * 24);
+    //     var anciennete = (Math.floor(days_Diff));
+    //     // console.log(newsInDB);
+    //     if (anciennete >= 3) {
+    //         console.log(newsInDB[i]['_id'])
+
+    //         News.remove({ _id: ObjectId('' + newsInDB[i]['_id']) });
+    //         // News.deleteOne({_id: newsInDB[i]['_id']});
+    //     }
+    getNewsToRemove(3)
+    .then(function (response) {
+        // console.log(response);
+        response.forEach(function(element) {
+            console.log(element['id']);
+            // News.remove({ _id: element['id'] });
+            // News.find({ _id:element['id'] }).remove().exec();
+          });
+        
+    });
+    }
+
+
+    function getNewsToRemove(ancienneteARetirer) {
+        return new Promise(async function (resolve, reject) {
+            let toReturn = new Array();
+            let newsInDB = await News.find({});
+            let numbersNews = await News.countDocuments({});
+            let now = new Date();
+            let counter = 0;
     
-}
+            for (let i = 0; i < numbersNews; i++) {
+                var time_diff = now.getTime() - newsInDB[i]['date'].getTime();
+                var days_Diff = time_diff / (1000 * 3600 * 24);
+                var anciennete = (Math.floor(days_Diff));
+                console.log(anciennete);
+                if (anciennete >= ancienneteARetirer) {
+                    toReturn[counter] = newsInDB[i];
+                    counter++;
+                }
+            }
+
+            resolve(toReturn);
+        })
+    }

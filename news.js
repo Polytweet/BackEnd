@@ -1,8 +1,8 @@
 const https = require('https');
-var fs = require('fs')
+var fs = require('fs');
 var request = require('request');
 const mongoose = require('mongoose');
-const News = require('./model/news')
+const News = require('./model/news');
 
 
 module.exports = async function refreshNewsData() {
