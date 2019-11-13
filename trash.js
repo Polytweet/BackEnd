@@ -3,12 +3,23 @@
 
 const Commune = require('./model/commune');
 const Departement = require('./model/departement')
-
 var fs = require("fs");
-module.exports = jsonInput = () => {
+
+module.exports = addCommunes = () => {
   'use strict';
 
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result1.json');
+  console.log('coucou')
+
+  // let rawdata = fs.readFileSync('./model/result1.json');
+  // let rawdata = fs.readFileSync('./model/result2.json');
+  // let rawdata = fs.readFileSync('./model/result3.json');
+  // let rawdata = fs.readFileSync('./model/result4.json');
+  // let rawdata = fs.readFileSync('./model/result5.json');
+  // let rawdata = fs.readFileSync('./model/result6.json');
+  // let rawdata = fs.readFileSync('./model/result7.json');
+  // let rawdata = fs.readFileSync('./model/result8.json');
+  // let rawdata = fs.readFileSync('./model/result9.json');
+  let rawdata = fs.readFileSync('./model/result10.json');
   // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result2.json');
   // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result3.json');
   // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result4.json');
@@ -19,9 +30,71 @@ module.exports = jsonInput = () => {
   // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result9.json');
   // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result10.json');
 
-  let rawdata = fs.readFileSync('./model/dept.json');
   let communes = JSON.parse(rawdata);
-  communes.features.forEach(function(element) {
+  communes.forEach(function(element) {
+    var com;
+    if(element.fields.geo_shape.type == 'MultiPolygon') {
+      com = new Commune({
+        _type: element.type,
+        fields: {
+          nom_dept: element.fields.nom_dept,
+          population: element.fields.population,
+          code_reg: element.fields.code_reg,
+          nom_reg: element.fields.nom_reg,
+          geo_point_2d: element.fields.geo_point_2d,
+          code_dept: element.fields.code_dept,
+          code_com: element.fields.code_com,
+          geo_shape: {
+            _type: element.fields.geo_shape.type,
+            coordinatesMulti: element.fields.geo_shape.coordinates,
+          },
+          code_postal: element.fields.code_postal,
+          superficie: element.fields.superficie,
+          nom_com: element.fields.nom_com,
+        },
+        geometry: {
+          _type: element.geometry.type,
+          coordinates: element.geometry.coordinates
+        }
+      })
+    } else {
+      com = new Commune({
+        _type: element.type,
+        fields: {
+          nom_dept: element.fields.nom_dept,
+          population: element.fields.population,
+          code_reg: element.fields.code_reg,
+          nom_reg: element.fields.nom_reg,
+          geo_point_2d: element.fields.geo_point_2d,
+          code_dept: element.fields.code_dept,
+          code_com: element.fields.code_com,
+          geo_shape: {
+            _type: element.fields.geo_shape.type,
+            coordinates: element.fields.geo_shape.coordinates,
+          },
+          code_postal: element.fields.code_postal,
+          superficie: element.fields.superficie,
+          nom_com: element.fields.nom_com,
+        },
+        geometry: {
+          _type: element.geometry.type,
+          coordinates: element.geometry.coordinates
+        }
+      })
+    }
+       
+      com.save(); 
+      // console.log(element.geometry.type)
+      // console.log(element.geometry.coordinates)
+  }, this);
+}
+
+/*module.exports = addDepartements = () => {
+  'use strict';
+
+  let rawdata = fs.readFileSync('./model/dept.json');
+  let departement = JSON.parse(rawdata);
+  departement.features.forEach(function(element) {
     var dept;
     if(element.geometry.type == 'MultiPolygon') {
       dept = new Departement({
@@ -53,7 +126,7 @@ module.exports = jsonInput = () => {
       // console.log(element.geometry.type)
       // console.log(element.geometry.coordinates)
   }, this);
-}
+}*/
 // jsonInput()
 
 

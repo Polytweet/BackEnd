@@ -82,7 +82,7 @@ schedule.scheduleJob('0 0 * * * *', function(){
   news();
 });
 
-
+// news();
 
 const Commune = require('./model/commune');
 const News = require('./model/news');
@@ -97,3 +97,16 @@ var db = mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlP
 }).catch(err => {
   console.log(err);
 });
+
+// const addCommunes = require('./trash.js')
+// const addDepartements = require('./trash')
+// addDepartements();
+// addCommunes();
+
+// TWEETS API //
+
+    var StartTweetStream = require('./tweets.js');
+    var boundingBox = [ '-5.03', '42.28', '8.41', '51.19' ];
+    StartTweetStream(boundingBox);
+	
+// END //

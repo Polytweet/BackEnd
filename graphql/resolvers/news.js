@@ -1,22 +1,9 @@
-const news = [
-    // {
-    //     title: 'String',
-    //     description: 'String',
-    //     url: 'String',
-    //     date: 'fr',
-    //     content: 'gr'
-    // },
-    // {
-    //     title: 'g',
-    //     description: 'lgjnp',
-    //     url: 'String',
-    //     date: 'String',
-    //     content: 'String'
-    // },
-];
+const News = require('../../model/news');
 
 module.exports = {
     Query: {
-        news: () => news,
+        news: async () => {
+            return News.find().sort({date: -1});
+        },
     },
 };
