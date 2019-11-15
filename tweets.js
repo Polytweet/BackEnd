@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const Tweets = require('./model/tweets.js');
 
 var T = new Twit({
-    consumer_key:         'dwlUZf2SWjPCWQWcXSgHZOjSY',
-    consumer_secret:      'OclSCee156QNha7xIWbKOh1yJKS6DmE5B2Ypf8W6dONJ3TV8Pt',
+    consumer_key:         'GHQFHxOVTxWPdQKZTnbn4eeUo',
+    consumer_secret:      '80imXfoVwDFkwRDBJBp1QoclJ9RhPOIY4FyKotRa4kHUES8AMe',
     access_token:         '890649688822644736-s88fmMgiNd94AFFqVyPYK3o7TkNUwcw',
     access_token_secret:  'H04VuFTFkL2nJyAlEPcGElwNupMCsqt8yIKGysfbCZyy2',
   });
@@ -14,20 +14,26 @@ var T = new Twit({
 module.exports = async function StartTweetSteam(boundingBox){
     var stream = T.stream('statuses/filter', { locations: boundingBox } );
     stream.on('tweet', function (tweet) {
+        var city = tweet['place']['name'];
+        var text = tweet['text'];
+        var hashtagTab = [];
+
         for (var i=0;i<tweet['entities']['hashtags'].length;i++) {
-            let hashtag = tweet['entities']['hashtags'][i]['text'];
-            let city = tweet['place']['name'];
-            //console.log(hashtag + ' -> ' + city);
-            insertTweets(hashtag, city);
+            hashtagTab[i] = tweet['entities']['hashtags'][i]['text'];
+        }
+
+        if(hashtagTab.length > 0){
+            insertTweets(hashtagTab, city, text);
         }
     });
 }
 
-async function insertTweets(_hashtag, _city) {
+async function insertTweets(_hashtag, _city, _text) {
     let tweets = new Tweets({
         hashtag : _hashtag,
         city : _city,
+        text : _text,
     });
-    console.log(_hashtag + ' -> ' + _city);
+    console.log(_hashtag + ' -> ' + _city + ' ----> ' + _text);
     await tweets.save();
 }
