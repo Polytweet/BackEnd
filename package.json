@@ -9,7 +9,7 @@
     "api": "nodemon api-service.js",
     "news": "nodemon news-service.js",
     "tweets": "nodemon tweets-service.js",
-    "all": "node api-service.js & node news-service.js & node tweets-service.js"
+    "all": "nodemon api-service.js & nodemon news-service.js & nodemon tweets-service.js"
   },
   "keywords": [],
   "author": "",

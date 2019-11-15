@@ -6,8 +6,9 @@ const typeDefs = gql`
     scalar Date
 
     type News {
-        source : String,
-        author : String,
+        _id: String,
+        source: String,
+        author: String,
         title: String,
         description: String,
         url: String,
