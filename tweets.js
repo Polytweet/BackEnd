@@ -5,15 +5,16 @@ const mongoose = require('mongoose');
 const Tweets = require('./model/tweets.js');
 
 var T = new Twit({
-    consumer_key:         'GHQFHxOVTxWPdQKZTnbn4eeUo',
-    consumer_secret:      '80imXfoVwDFkwRDBJBp1QoclJ9RhPOIY4FyKotRa4kHUES8AMe',
-    access_token:         '890649688822644736-s88fmMgiNd94AFFqVyPYK3o7TkNUwcw',
-    access_token_secret:  'H04VuFTFkL2nJyAlEPcGElwNupMCsqt8yIKGysfbCZyy2',
+    consumer_key:         'aX2X2z4x4FVXhZKFEwGD7FGaT',
+    consumer_secret:      'rMXskHXkkRlf5ozk70whkYCxf6jA8M1gN0Ntugcyy9QAh4riDy',
+    access_token:         '890649688822644736-az44QIQKokKurIiJkvA0n6QQBxhr66s',
+    access_token_secret:  'T4lvTY54aYI4vPlXuaLbyYMjgHHzdKOxJdFJ08paTy9XS',
   });
 
 module.exports = async function StartTweetSteam(boundingBox){
     var stream = T.stream('statuses/filter', { locations: boundingBox } );
     stream.on('tweet', function (tweet) {
+        console.log('.');
         var city = tweet['place']['name'];
         var text = tweet['text'];
         var hashtagTab = [];
