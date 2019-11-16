@@ -14,17 +14,20 @@ var T = new Twit({
 module.exports = async function StartTweetSteam(boundingBox){
     var stream = T.stream('statuses/filter', { locations: boundingBox } );
     stream.on('tweet', function (tweet) {
-        console.log('.');
-        var city = tweet['place']['name'];
-        var text = tweet['text'];
-        var hashtagTab = [];
-
-        for (var i=0;i<tweet['entities']['hashtags'].length;i++) {
-            hashtagTab[i] = tweet['entities']['hashtags'][i]['text'];
-        }
-
-        if(hashtagTab.length > 0){
-            insertTweets(hashtagTab, city, text);
+        try {
+            var city = tweet['place']['name'];
+            var text = tweet['text'];
+            var hashtagTab = [];
+    
+            for (var i=0;i<tweet['entities']['hashtags'].length;i++) {
+                hashtagTab[i] = tweet['entities']['hashtags'][i]['text'];
+            }
+    
+            if(hashtagTab.length > 0){
+                insertTweets(hashtagTab, city, text);
+            }   
+        } catch (error) {
+            console.log(error);
         }
     });
 }
