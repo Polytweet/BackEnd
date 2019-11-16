@@ -20,6 +20,7 @@ const typeDefs = gql`
         _id: String
         hashtag: [String]
         city: String
+        text: String
         createdat: Date
     }
 
