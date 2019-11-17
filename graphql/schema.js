@@ -16,6 +16,14 @@ const typeDefs = gql`
         content: String
     }
 
+    type Tweet {
+        _id: String
+        hashtag: [String]
+        city: String
+        text: String
+        createdat: Date
+    }
+
     type GeoShape {
         _type: String
         coordinates: [ [ [ Float ] ] ]
@@ -57,7 +65,8 @@ const typeDefs = gql`
     type Query {
         communes(code_dept:String): [Communes]
         departements: [Departement]
-        news : [News]
+        news: [News]
+        tweets: [Tweet]
     }`
 ;
 
