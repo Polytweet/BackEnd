@@ -4,10 +4,10 @@ const Tweets = require('./model/tweets.js');
 const fs = require('fs');
 
 var T = new Twit({
-    consumer_key:         'hqVARsfpJdF94wQGTn8E8oOjF',
-    consumer_secret:      '9ytItzqpYXHvwKylmTFZElFM2YuvVhbPbUGhe5wnzFennzdD3A',
-    access_token:         '890649688822644736-rWXPESV4CxyJUYciuyfEftDdFKgkEPA',
-    access_token_secret:  'OtzxZlwHvqgbfZ2hFA27bFSUuuTSwcCkJn8UaHsDxk0eC',
+    consumer_key:         'EpP9GIS78AIRQxy3qX1NpJf4H',
+    consumer_secret:      '9828PtJOgdWHpUhmjWJKeg9wWj30FgKqhH94rNWXSEOHPY8Qm7',
+    access_token:         '890649688822644736-mT4pn0gjMhIiqPUnPze0PYr8D2yPejX',
+    access_token_secret:  'OBhn9LnPIfFYkqcXUZGSX092XzqTOMnFHaIc0Yg48Gp8d',
   });
 
 module.exports = async function StartTweetSteam(boundingBox){
