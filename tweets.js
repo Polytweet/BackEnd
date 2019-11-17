@@ -22,11 +22,11 @@ module.exports = async function StartTweetSteam(boundingBox){
             }
     
             if(hashtagTab.length > 0){
-                callApiByCityName(city).then(function(resolve){
-                    console.log(resolve);
-                })
-                .catch(reject);  
-                //insertTweets(hashtagTab, city, text);
+                // callApiByCityName(city).then(function(resolve){
+                //     console.log(resolve);
+                // })
+                // .catch(reject);  
+                insertTweets(hashtagTab, city, text);
             }   
         } catch (error) {
             console.log(error);
