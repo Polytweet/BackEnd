@@ -3,8 +3,17 @@ const Schema = mongoose.Schema;
 
 const tweets = new Schema({
     hashtag : [],
-    city : String,
     text : String,
+    geoTweet : {
+        city : String,
+        cityCode : String,
+        departmentCode : String,
+        regionCode : String        
+    },
+    checked : {
+        type : Boolean,
+        default : false
+    },
     createdat: {
         type: Date,
         default: Date.now
