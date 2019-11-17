@@ -10,6 +10,10 @@ const tweets = new Schema({
         departmentCode : String,
         regionCode : String        
     },
+    checked : {
+        type : Boolean,
+        default : false
+    },
     createdat: {
         type: Date,
         default: Date.now
