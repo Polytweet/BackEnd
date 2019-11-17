@@ -22,6 +22,14 @@ const typeDefs = gql`
         city: String
         text: String
         createdat: Date
+        checked : Boolean
+    }
+
+    type MatchingTN {
+        _id : String
+        news : News
+        tweet : Tweet
+        percentage : Float
     }
 
     type GeoShape {

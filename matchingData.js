@@ -3,25 +3,125 @@ var fs = require('fs');
 var request = require('request');
 const mongoose = require('mongoose');
 const News = require('./model/news');
+const Tweet = require('./model/tweets')
+// const matchingTN = require('./model/matchingTN');
 
 module.exports = async function matchingData() {
+    let arrayOfNews = await getTitleNews();
+    let arrayOfTweets = await getTweets();
 
-let tab = await getTitleNews();
-console.log(tab);
+    // console.log(arrayOfTweets);
+
+
+    arrayOfTweets.forEach(async function (tw) {
+        let ressemblance = getSimilarity(tw['content'], arrayOfNews);
+        await Tweet.updateOne(
+            {_id : tw['id']},
+            {
+                $set: {
+                    checked: true
+                }
+            }
+        )
+
+        let t = await Tweet.findById(tw['id']);
+        let n = await News.findById(ressemblance['news']['id']);
+
+
+        // await MatchingTN.save()
+        if (ressemblance['pourcentage'] > 40)
+        {
+        console.log("Le tweet \n" + t + "\n ressemble à " + ressemblance['pourcentage'] + "% à la news \n" +n);
+        }
+    });
 }
 
 
-async function getTitleNews()
-{
-    var motsASupprimer = ['et','le', 'la', 'les', 'un', 'une', 'des', 'du', 'de', 'ce', 'cet', 'cette', 
-    'ces', 'mon', 'ma', 'mes', 'ton', 'ta', 'tes', 'son', 'sa', 'ses', 'notre', 'nos', 'votre', 'vos', 
-    'leur', 'leurs', 'en', 'par', 'ne', 'dans', 'pour', 'quel', 'quelle', 'quels' , 'quelles', 'qui', 'quoi'];
+function generateSimilarity(text1, text2) {
+    list1 = text1.split(' '); //news
+    let total = list1.length;
+    let numberWordsFound = 0;
+
+
+    list1.forEach(function (element) {
+        // let isInTheTweet = text2.includes(element);
+        let isInTheTweet = text2.indexOf(element);
+        if (isInTheTweet != -1) {
+            numberWordsFound++;
+        }
+    });
+
+    return numberWordsFound / total;
+}
+
+function getSimilarity(tw, ar) {
+
+    let similariteMax = 0;
+    let newsSimilaire = null;
+
+    ar.forEach(function (element) {
+        let value = generateSimilarity(element['content'], tw);
+
+        if (value > similariteMax) {
+            similariteMax = value;
+            newsSimilaire = element;
+        }
+    });
+
+    let toReturn = new Array();
+    toReturn['news'] = newsSimilaire;
+    toReturn['pourcentage'] = similariteMax * 100;
+
+    return toReturn;
+}
+
+
+async function getTweets() {
+    let toReturn = new Array();
+    let TweetsInDB = await Tweet.find({});
+    // let TweetsInDB = await Tweet.find({ checked: false });
+    // console.log(TweetsInDB);
+    let counter = 0;
+
+    TweetsInDB.forEach(function (element) {
+
+        toReturn[counter] = new Array();
+        toReturn[counter]['id'] = element['id'];
+        toReturn[counter]['content'] = '';
+
+        let words = (element['text'].toLowerCase()).split(' ');
+
+        words.forEach(function (word) {
+            if ((word[0] != '#') && (word[0] != '@') && !((word[0] == 'h') && (word[1] == 't') && (word[2] == 't') && (word[3] == 'p'))) {
+                toReturn[counter]['content'] += word + ' ';
+            }
+        });
+
+        element['hashtag'].forEach(function (hash) {
+            toReturn[counter]['content'] += " " + hash;
+        });
+
+        counter++;
+
+    });
+    return toReturn;
+}
+
+async function getTitleNews() {
+    var motsASupprimer = ['et', 'le', 'la', 'les', 'un', 'une', 'des', 'du', 'de', 'ce', 'cet', 'cette',
+        'ces', 'mon', 'ma', 'mes', 'ton', 'ta', 'tes', 'son', 'sa', 'ses', 'notre', 'nos', 'votre', 'vos',
+        'leur', 'leurs', 'en', 'par', 'ne', 'dans', 'pour', 'quel', 'quelle', 'quels', 'quelles', 'qui', 'quoi',
+        'a', 'as', 'avons', 'avez', 'ont', 'suis', 'es', 'est', 'sommes', 'êtes', 'sont', 'il', 'elle', 'figaro',
+        'lci', 'ils', 'elles', 'on', 'an', 'au', 'aux', 'bfmtv.com'];
     let newsInDB = await News.find({});
+    //console.log(newsInDB);
     let toReturn = new Array();
     let counterToReturn = 0;
 
     newsInDB.forEach(function (element) {
-        // console.log(element['title']);
+        toReturn[counterToReturn] = new Array();
+        toReturn[counterToReturn]['id'] = element['id'];
+
         let words = (element['title'].toLowerCase()).split(' ');
         //console.log(words);
 
@@ -45,8 +145,12 @@ async function getTitleNews()
             }
         });
 
-        toReturn[counterToReturn] = cleanWords;
-        counterToReturn ++;
+        toReturn[counterToReturn]['content'] = "";
+        cleanWords.forEach(function (e) {
+            toReturn[counterToReturn]['content'] += " " + e;
+        });
+
+        counterToReturn++;
     });
     return toReturn;
 }

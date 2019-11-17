@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const matchingData = require('./matchingData');
 
 mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-    
-  // your code here
+  matchingData();   
+  
 
 }).catch(err => {
   console.log(err);
