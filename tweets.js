@@ -1,12 +1,13 @@
 var Twit = require('twit');
 const https = require('https');
 const Tweets = require('./model/tweets.js');
+const fs = require('fs');
 
 var T = new Twit({
-    consumer_key:         'aX2X2z4x4FVXhZKFEwGD7FGaT',
-    consumer_secret:      'rMXskHXkkRlf5ozk70whkYCxf6jA8M1gN0Ntugcyy9QAh4riDy',
-    access_token:         '890649688822644736-az44QIQKokKurIiJkvA0n6QQBxhr66s',
-    access_token_secret:  'T4lvTY54aYI4vPlXuaLbyYMjgHHzdKOxJdFJ08paTy9XS',
+    consumer_key:         'hqVARsfpJdF94wQGTn8E8oOjF',
+    consumer_secret:      '9ytItzqpYXHvwKylmTFZElFM2YuvVhbPbUGhe5wnzFennzdD3A',
+    access_token:         '890649688822644736-rWXPESV4CxyJUYciuyfEftDdFKgkEPA',
+    access_token_secret:  'OtzxZlwHvqgbfZ2hFA27bFSUuuTSwcCkJn8UaHsDxk0eC',
   });
 
 module.exports = async function StartTweetSteam(boundingBox){
@@ -22,11 +23,15 @@ module.exports = async function StartTweetSteam(boundingBox){
             }
     
             if(hashtagTab.length > 0){
-                // callApiByCityName(city).then(function(resolve){
-                //     console.log(resolve);
-                // })
-                // .catch(reject);  
-                insertTweets(hashtagTab, city, text);
+                callApiByCityName(city)
+                .then(function (response){
+                    if(response){
+                        insertTweets(hashtagTab, text, response);
+                    }
+                })
+                .catch(function (req){
+                    console.log(req);
+                })
             }   
         } catch (error) {
             console.log(error);
@@ -34,33 +39,50 @@ module.exports = async function StartTweetSteam(boundingBox){
     });
 }
 
-async function insertTweets(_hashtag, _city, _text) {
+async function insertTweets(_hashtag, _text, _geoTweet) {
     let tweets = new Tweets({
         hashtag : _hashtag,
-        city : _city,
         text : _text,
+        geoTweet : {
+            city : _geoTweet[0],
+            cityCode : _geoTweet[1],
+            departmentCode : _geoTweet[2],
+            regionCode : _geoTweet[3],
+        }
     });
-    console.log(_hashtag + ' -> ' + _city + ' ----> ' + _text);
+    console.log('\x1b[31m', _hashtag + ' -> ' + _text);
+    console.log('\x1b[34m', 'From -> ' + _geoTweet + '\x1b[0m\n');
 
     await tweets.save();
 }
 
 function callApiByCityName(cityName){
-    return new Promise(function (resolve, reject) {
-        https.get('https://geo.api.gouv.fr/communes?nom=' + cityName + '&fields=departement&boost=population&limit=5', (resp) => {
+    return new Promise(function (resolve, reject){
         let data = '';
-        
-        resp.on('data', (chunk) => {
-            data += chunk;
+        https.get('https://geo.api.gouv.fr/communes?nom=' + cityName + '&limit=1', (resp) => {            
+            resp.on('data', (chunk) => {
+                data += chunk;
+            });
+            resp.on('end', () => {
+                let dataParsed = JSON.parse(data);
+                if(dataParsed.length > 0){
+                    try {
+                        let cityInfo = [];
+                        cityInfo[0] = dataParsed[0]['nom'];
+                        cityInfo[1] = dataParsed[0]['code'];
+                        cityInfo[2] = dataParsed[0]['codeDepartement'];
+                        cityInfo[3] = dataParsed[0]['codeRegion'];
+                        resolve(cityInfo);
+                    } catch (error) {
+                        reject(error);   
+                    }
+                }
+                else{
+                    resolve(null);
+                }
+            });
+            }).on("error", (error) => {
+                reject(error);
         });
-
-        resp.on('end', () => {
-            resolve(data);
-        });
-        
-        }).on("error", (err) => {
-            console.log("Error API: " + err.message);
-            reject(err);
-        });
-    });
+    })
 }
