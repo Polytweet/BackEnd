@@ -1,7 +1,5 @@
 var Twit = require('twit');
-const fs = require('fs');
-var request = require('request');
-const mongoose = require('mongoose');
+const https = require('https');
 const Tweets = require('./model/tweets.js');
 
 var T = new Twit({
@@ -24,7 +22,11 @@ module.exports = async function StartTweetSteam(boundingBox){
             }
     
             if(hashtagTab.length > 0){
-                insertTweets(hashtagTab, city, text);
+                callApiByCityName(city).then(function(resolve){
+                    console.log(resolve);
+                })
+                .catch(reject);  
+                //insertTweets(hashtagTab, city, text);
             }   
         } catch (error) {
             console.log(error);
@@ -39,5 +41,26 @@ async function insertTweets(_hashtag, _city, _text) {
         text : _text,
     });
     console.log(_hashtag + ' -> ' + _city + ' ----> ' + _text);
+
     await tweets.save();
+}
+
+function callApiByCityName(cityName){
+    return new Promise(function (resolve, reject) {
+        https.get('https://geo.api.gouv.fr/communes?nom=' + cityName + '&fields=departement&boost=population&limit=5', (resp) => {
+        let data = '';
+        
+        resp.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        resp.on('end', () => {
+            resolve(data);
+        });
+        
+        }).on("error", (err) => {
+            console.log("Error API: " + err.message);
+            reject(err);
+        });
+    });
 }
