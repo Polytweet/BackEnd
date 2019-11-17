@@ -78,8 +78,8 @@ function getSimilarity(tw, ar) {
 
 async function getTweets() {
     let toReturn = new Array();
-    let TweetsInDB = await Tweet.find({});
-    // let TweetsInDB = await Tweet.find({ checked: false });
+    // let TweetsInDB = await Tweet.find({});
+    let TweetsInDB = await Tweet.find({ checked: false });
     // console.log(TweetsInDB);
     let counter = 0;
 
