@@ -3,20 +3,18 @@ var fs = require('fs');
 var request = require('request');
 const mongoose = require('mongoose');
 const News = require('./model/news');
-const Tweet = require('./model/tweets')
-// const matchingTN = require('./model/matchingTN');
+const Tweet = require('./model/tweets');
+const MatchingTN = require('./model/matchingTN');
 
 module.exports = async function matchingData() {
     let arrayOfNews = await getTitleNews();
-    let arrayOfTweets = await getTweets();
-
-    // console.log(arrayOfTweets);
+    let arrayOfTweets = await getTweets({checked:false});
 
 
     arrayOfTweets.forEach(async function (tw) {
         let ressemblance = getSimilarity(tw['content'], arrayOfNews);
         await Tweet.updateOne(
-            {_id : tw['id']},
+            { _id: tw['id'] },
             {
                 $set: {
                     checked: true
@@ -28,10 +26,11 @@ module.exports = async function matchingData() {
         let n = await News.findById(ressemblance['news']['id']);
 
 
-        // await MatchingTN.save()
+
         if (ressemblance['pourcentage'] > 40)
         {
-        console.log("Le tweet \n" + t + "\n ressemble à " + ressemblance['pourcentage'] + "% à la news \n" +n);
+            console.log("Le tweet \n" + t + "\n ressemble à " + ressemblance['pourcentage'] + "% à la news \n" + n);
+            await MatchingTN.save({ news: ressemblance['news']['id'], tweet: tw['id'], percentage: ressemblance['pourcentage'], algorithmUsed : "ALGO_0"});
         }
     });
 }

@@ -26,10 +26,11 @@ const typeDefs = gql`
     }
 
     type MatchingTN {
-        _id : String
-        news : News
-        tweet : Tweet
-        percentage : Float
+        _id: String
+        news: String
+        tweet: String
+        percentage: Float
+        algorithmUsed: String
     }
 
     type GeoShape {
@@ -75,6 +76,7 @@ const typeDefs = gql`
         departements: [Departement]
         news: [News]
         tweets: [Tweet]
+        matchingTN: [MatchingTN]
     }`
 ;
 

@@ -7,9 +7,10 @@ const Schema = mongoose.Schema;
 
 const matchingTN = new Schema({
     _id : String,
-    news : News,
-    tweet : Tweet,
-    percentage : Number
+    news : String,
+    tweet : String,
+    percentage : Number,
+    algorithmUsed : String,
 });
 
 module.exports = mongoose.model('MatchingTN', matchingTN);
