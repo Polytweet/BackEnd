@@ -76,6 +76,9 @@ const typeDefs = gql`
         departements: [Departement]
         news: [News]
         tweets: [Tweet]
+        tweetsFromCity(cityCode: Int): [Tweet]
+        tweetsFromDepartement(depCode: Int): [Tweet]
+        tweetsFromRegion(regCode: Int): [Tweet]
         matchingTN: [MatchingTN]
     }`
 ;
