@@ -16,13 +16,20 @@ const typeDefs = gql`
         content: String
     }
 
+    type GeoTweet {
+        city: String
+        cityCode: Int
+        departmentCode: Int
+        regionCode: Int 
+    }
+
     type Tweet {
         _id: String
         hashtag: [String]
-        city: String
+        geoTweet: GeoTweet
         text: String
         createdat: Date
-        checked : Boolean
+        checked: Boolean
     }
 
     type MatchingTN {
