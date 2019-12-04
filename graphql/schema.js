@@ -79,7 +79,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        communes(code_dept:String): [Communes]
+        communes(code_dept:String, nom_dept:String): [Communes]
         departements: [Departement]
         news: [News]
         tweets: [Tweet]

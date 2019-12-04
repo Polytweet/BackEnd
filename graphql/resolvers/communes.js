@@ -4,8 +4,33 @@ const Departement = require('../../model/departement');
 module.exports = {
   Query: {
     communes: async (parent, args, context) => {
+
+      let _code;
+      if (args.code_dept == undefined) {
+        _code = null;
+      } else {
+        _code = { 'fields.code_dept': args.code_dept };
+      }
+
+      let _nom;
+      if (args.nom_dept == undefined) {
+        _nom = null;
+      } else {
+        _nom = { 'fields.nom_dept': args.nom_dept };
+      }
+
+      let argsforquery;
+      if (_nom != null) {
+        argsforquery = _nom;
+      } else {
+        argsforquery = _code;
+      }
+
+      console.log(JSON.stringify(argsforquery))
+
       try {
-        const result = await Commune.find({ 'fields.code_dept': args.code_dept });
+        // const result = await Commune.find({ 'fields.code_dept': args.code_dept });
+        const result = await Commune.find(argsforquery);
         return result.map(commune => {
           return {
             type: "Feature",
