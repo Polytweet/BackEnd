@@ -6,9 +6,9 @@ const tweets = new Schema({
     text : String,
     geoTweet : {
         city : String,
-        cityCode : Number,
-        departmentCode : Number,
-        regionCode : Number        
+        cityCode : String,
+        departmentCode : String,
+        regionCode : String        
     },
     checked : {
         type : Boolean,

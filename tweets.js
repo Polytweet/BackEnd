@@ -44,9 +44,9 @@ async function insertTweets(_hashtag, _text, _geoTweet) {
         text : _text,
         geoTweet : {
             city : _geoTweet[0],
-            cityCode : Number(_geoTweet[1]),
-            departmentCode : Number(_geoTweet[2]),
-            regionCode : Number(_geoTweet[3]),
+            cityCode : _geoTweet[1],
+            departmentCode : _geoTweet[2],
+            regionCode : _geoTweet[3],
         }
     });
     console.log('\x1b[31m', _hashtag + ' -> ' + _text);

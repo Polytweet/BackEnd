@@ -18,9 +18,9 @@ const typeDefs = gql`
 
     type GeoTweet {
         city: String
-        cityCode: Int
-        departmentCode: Int
-        regionCode: Int 
+        cityCode: String
+        departmentCode: String
+        regionCode: String 
     }
 
     type Tweet {
