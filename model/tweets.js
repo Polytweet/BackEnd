@@ -17,10 +17,6 @@ const tweets = new Schema({
     createdat: {
         type: Date,
         default: Date.now
-    },
-    checked : {
-        type : Boolean,
-        default : false
     }
 });
 
