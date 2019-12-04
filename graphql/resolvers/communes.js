@@ -26,7 +26,7 @@ module.exports = {
         argsforquery = _code;
       }
 
-      console.log(JSON.stringify(argsforquery))
+      // console.log(JSON.stringify(argsforquery))
 
       try {
         // const result = await Commune.find({ 'fields.code_dept': args.code_dept });
