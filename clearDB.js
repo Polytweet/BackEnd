@@ -15,7 +15,6 @@ module.exports = async function clearDataBase() {
     });
     }
 
-
     function getNewsToRemove(ancienneteARetirer) {
         return new Promise(async function (resolve, reject) {
             let toReturn = new Array();
