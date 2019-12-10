@@ -78,14 +78,24 @@ const typeDefs = gql`
         geometry: GeoShape
     }
 
+    type TopHashtag {
+        _id: String!
+        count: Int
+    }
+    
     type Query {
         communes(code_dept:String, nom_dept:String): [Communes]
         departements: [Departement]
         news: [News]
-        tweets: [Tweet]
-        tweetsFromCity(cityCode: Int): [Tweet]
-        tweetsFromDepartement(depCode: Int): [Tweet]
-        tweetsFromRegion(regCode: Int): [Tweet]
+        tweets: [Tweet] @deprecated(reason: "Please use tweetsFromFrance instead")
+        tweetsFromFrance: [Tweet]
+        tweetsFromCity(cityCode: String): [Tweet]
+        tweetsFromDepartement(depCode: String): [Tweet]
+        tweetsFromRegion(regCode: String): [Tweet]
+        topHashtagsFromFrance: [TopHashtag]
+        topHashtagsFromCity(cityCode: String): [TopHashtag]
+        topHashtagsFromDepartement(depCode: String): [TopHashtag]
+        topHashtagsFromRegion(regCode: String): [TopHashtag]
         matchingTN: [MatchingTN]
     }`
 ;

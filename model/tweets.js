@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const tweets = new Schema({
-    hashtag : [],
+    hashtag : [String],
     text : String,
     geoTweet : {
         city : String,
