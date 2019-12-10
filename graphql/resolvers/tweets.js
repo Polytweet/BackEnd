@@ -27,7 +27,7 @@ module.exports = {
                 { $unwind: "$hashtag" },
                 {
                     $group: {
-                        _id: {$toLower: '$hashtag'},
+                        _id: '$hashtag',
                         count: { $sum: 1 }
                     }
                 },
@@ -51,7 +51,7 @@ module.exports = {
                 { $unwind: "$hashtag" },
                 {
                     $group: {
-                        _id: {$toLower: '$hashtag'},
+                        _id: '$hashtag',
                         count: { $sum: 1 }
                     }
                 },
@@ -75,7 +75,7 @@ module.exports = {
                 { $unwind: "$hashtag" },
                 {
                     $group: {
-                        _id: {$toLower: '$hashtag'},
+                        _id: '$hashtag',
                         count: { $sum: 1 }
                     }
                 },
@@ -99,7 +99,7 @@ module.exports = {
                 { $unwind: "$hashtag" },
                 {
                     $group: {
-                        _id: {$toLower: '$hashtag'},
+                        _id: '$hashtag',
                         count: { $sum: 1 }
                     }
                 },
