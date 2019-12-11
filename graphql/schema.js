@@ -96,6 +96,10 @@ const typeDefs = gql`
         topHashtagsFromCity(cityCode: String): [TopHashtag]
         topHashtagsFromDepartement(depCode: String): [TopHashtag]
         topHashtagsFromRegion(regCode: String): [TopHashtag]
+        numberOfTweetsPerDayFromFrance: Float
+        numberOfTweetsPerDayFromRegion(regCode: String): Float
+        numberOfTweetsPerDayFromDepartement(depCode: String): Float
+        numberOfTweetsPerDayFromCity(cityCode: String): Float
         matchingTN: [MatchingTN]
     }`
 ;
