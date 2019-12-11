@@ -1,5 +1,6 @@
 const Commune = require('../../model/commune');
 const Departement = require('../../model/departement');
+const Region = require("../../model/region");
 
 module.exports = {
   Query: {
@@ -80,6 +81,28 @@ module.exports = {
       } catch (err) {
         throw err;
       }
+    },
+    regions: async (parent, args, context) => {
+      try {
+        const result = await Region.find({});
+        return result.map(region => {
+          return {
+            type: region._type,
+            properties: {
+              code: region.properties.code,
+              nom: region.properties.nom,
+            },
+            geometry: {
+              _type: region.geometry._type,
+              coordinates: region.geometry.coordinates,
+              coordinatesMulti: region.geometry.coordinatesMulti
+            }     
+          }
+        })
+      } catch (err) {
+        throw err;
+      }
     }
+
   },
 };

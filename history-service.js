@@ -1,3 +1,5 @@
+//BUGNONE Michaël
+
 const mongoose = require('mongoose');
 
 mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {

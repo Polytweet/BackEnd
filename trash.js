@@ -3,32 +3,13 @@
 
 const Commune = require('./model/commune');
 const Departement = require('./model/departement')
+const Region = require('./model/region')
 var fs = require("fs");
 
 module.exports = addCommunes = () => {
   'use strict';
 
-  console.log('coucou')
-
-  // let rawdata = fs.readFileSync('./model/result1.json');
-  // let rawdata = fs.readFileSync('./model/result2.json');
-  // let rawdata = fs.readFileSync('./model/result3.json');
-  // let rawdata = fs.readFileSync('./model/result4.json');
-  // let rawdata = fs.readFileSync('./model/result5.json');
-  // let rawdata = fs.readFileSync('./model/result6.json');
-  // let rawdata = fs.readFileSync('./model/result7.json');
-  // let rawdata = fs.readFileSync('./model/result8.json');
-  // let rawdata = fs.readFileSync('./model/result9.json');
   let rawdata = fs.readFileSync('./model/result10.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result2.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result3.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result4.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result5.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result6.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result7.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result8.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result9.json');
-  // let rawdata = fs.readFileSync('/home/polytweetlyon/server/model/result10.json');
 
   let communes = JSON.parse(rawdata);
   communes.forEach(function(element) {
@@ -89,7 +70,7 @@ module.exports = addCommunes = () => {
   }, this);
 }
 
-/*module.exports = addDepartements = () => {
+module.exports = addDepartements = () => {
   'use strict';
 
   let rawdata = fs.readFileSync('./model/dept.json');
@@ -121,14 +102,45 @@ module.exports = addCommunes = () => {
         }
       })
     }
-       
       dept.save(); 
-      // console.log(element.geometry.type)
-      // console.log(element.geometry.coordinates)
   }, this);
-}*/
-// jsonInput()
+}
 
+module.exports = addRegion = function(){
+  let rawdata = fs.readFileSync('./model/region.json');
+  let region = JSON.parse(rawdata);
+  region['features'].forEach(function(element) {
+    var reg;
+    if(element.geometry.type == 'MultiPolygon') {
+      reg = new Region({
+        _type: element.type,
+        properties: {
+          code: element.properties.code,
+          nom: element.properties.nom
+        },
+        geometry: {
+          _type: element.geometry.type,
+          coordinatesMulti: element.geometry.coordinates
+        }
+      })
+    } else {
+      reg = new Region({
+        _type: element.type,
+        properties: {
+          code: element.properties.code,
+          nom: element.properties.nom
+        },
+        geometry: {
+          _type: element.geometry.type,
+          coordinates: element.geometry.coordinates
+        }
+      })
+    }
+      console.log("save done");
+      reg.save(); 
+  }, this);
+  console.log("Finish");
+}
 
 
 // mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {

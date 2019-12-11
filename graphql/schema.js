@@ -77,10 +77,16 @@ const typeDefs = gql`
         properties: Properties
         geometry: GeoShape
     }
+    type Region {
+        type: String
+        properties: Properties
+        geometry: GeoShape
+    }
 
     type Query {
         communes(code_dept:String, nom_dept:String): [Communes]
         departements: [Departement]
+        regions: [Region]
         news: [News]
         tweets: [Tweet]
         tweetsFromCity(cityCode: Int): [Tweet]
