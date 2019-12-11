@@ -87,6 +87,16 @@ const typeDefs = gql`
         _id: String!
         count: Int
     }
+
+    type HashtagFromSet {
+        hashtag: String
+        count: Int
+    }
+    type SetOfTopHastags {
+        _id: String
+        hashtags: [HashtagFromSet]
+        count: Int
+    }
     
     type Query {
         communes(code_dept:String, nom_dept:String): [Communes]
@@ -106,23 +116,12 @@ const typeDefs = gql`
         numberOfTweetsPerDayFromRegion(regCode: String): Float
         numberOfTweetsPerDayFromDepartement(depCode: String): Float
         numberOfTweetsPerDayFromCity(cityCode: String): Float
+        totalNumberOfTweetsUsedByPolytweet: Int
+        topHashtagsFromAllRegions: [SetOfTopHastags]
+        topHashtagsFromAllDepartementsInOneRegion(regCode: String): [SetOfTopHastags]
+        topHashtagsFromAllCitiesInOneDepartement(depCode: String): [SetOfTopHastags]
         matchingTN: [MatchingTN]
     }`
 ;
 
 module.exports = typeDefs;
-
-    // type DepartementProperties {
-    //     code: String
-    //     nom: String
-    // }
-    // type DepartementGeometry {
-    //     _type: String
-    //     coordinates: [ [ [ Float ] ] ]
-    //     coordinatesMulti: [ [ [ [ { type: Number } ] ] ] ]
-    // }
-    // type Departement {
-    //     type: String
-    //     properties: DepartementProperties
-    //     geometry: DepartementGeometry
-    // }
