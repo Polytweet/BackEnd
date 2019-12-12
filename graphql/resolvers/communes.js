@@ -4,6 +4,9 @@ const Region = require("../../model/region");
 
 module.exports = {
   Query: {
+    /**
+     * @author Aurian Durand
+     */
     communes: async (parent, args, context) => {
 
       let _code;
@@ -61,6 +64,9 @@ module.exports = {
         throw err;
       }
     },
+    /**
+     * @author Aurian Durand
+     */
     departements: async (parent, args, context) => {
       try {
         const result = await Departement.find({});
@@ -82,6 +88,9 @@ module.exports = {
         throw err;
       }
     },
+    /**
+     * @author Michaël Bugnone
+     */
     regions: async (parent, args, context) => {
       try {
         const result = await Region.find({});

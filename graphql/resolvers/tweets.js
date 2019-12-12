@@ -2,21 +2,39 @@ const Tweets = require('../../model/tweets');
 
 module.exports = {
     Query: {
+        /**
+         * @author Aurian Durand
+         */
         tweets: async () => {
             return Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(1000);
         },
+        /**
+         * @author Aurian Durand
+         */
         tweetsFromFrance: async () => {
             return Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(1000);
         },
+        /**
+         * @author Aurian Durand
+         */
         tweetsFromCity: async (parent, args, context) => {
             return Tweets.find({'geoTweet.cityCode': args.cityCode}).sort({createdat: -1}).limit(1000);
         },
+        /**
+         * @author Aurian Durand
+         */
         tweetsFromDepartement: async (parent, args, context) => {
             return Tweets.find({'geoTweet.departmentCode': args.depCode}).sort({createdat: -1}).limit(1000);
         },
+        /**
+         * @author Aurian Durand
+         */
         tweetsFromRegion: async (parent, args, context) => {
             return Tweets.find({'geoTweet.regionCode': args.regCode}).sort({createdat: -1}).limit(1000);
         },
+        /**
+         * @author Aurian Durand
+         */
         topHashtagsFromFrance: async (parent, args, context) => {
             return await Tweets.aggregate([
                 {
@@ -41,6 +59,9 @@ module.exports = {
                 { $limit : 10 }
             ]);
         },
+        /**
+         * @author Aurian Durand
+         */
         topHashtagsFromCity: async (parent, args, context) => {
             let result = await Tweets.aggregate([
                 {
@@ -67,6 +88,9 @@ module.exports = {
             ]);
             return result;
         },
+        /**
+         * @author Aurian Durand
+         */
         topHashtagsFromDepartement: async (parent, args, context) => {
             return await Tweets.aggregate([
                 {
@@ -92,6 +116,9 @@ module.exports = {
                 { $limit : 10 }
             ]);
         },
+        /**
+         * @author Aurian Durand
+         */
         topHashtagsFromRegion: async (parent, args, context) => {
             return await Tweets.aggregate([
                 {
@@ -117,32 +144,50 @@ module.exports = {
                 { $limit : 10 }
             ]);
         },
+        /**
+         * @author Aurian Durand
+         */
         numberOfTweetsPerDayFromFrance: async (parent, args, context) => {
             return await Tweets.find({
                 createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
             }).countDocuments() / 7;
         },
+        /**
+         * @author Aurian Durand
+         */
         numberOfTweetsPerDayFromRegion: async (parent, args, context) => {
             return await Tweets.find({
                 'geoTweet.regionCode': args.regCode, 
                 createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
             }).countDocuments() / 7;
         },
+        /**
+         * @author Aurian Durand
+         */
         numberOfTweetsPerDayFromDepartement: async (parent, args, context) => {
             return await Tweets.find({
                 'geoTweet.departmentCode': args.depCode, 
                 createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
             }).countDocuments() / 7;
         },
+        /**
+         * @author Aurian Durand
+         */
         numberOfTweetsPerDayFromCity: async (parent, args, context) => {
             return await Tweets.find({
                 'geoTweet.cityCode': args.cityCode, 
                 createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
             }).countDocuments() / 7;
         },
+        /**
+         * @author Aurian Durand
+         */
         totalNumberOfTweetsUsedByPolytweet: async (parent, args, context) => {
             return Tweets.find().countDocuments();
         },
+        /**
+         * @author Aurian Durand
+         */
         topHashtagsFromAllRegions: async (parent, args, context) => {
             let result = await Tweets.aggregate([
                 {
@@ -168,6 +213,9 @@ module.exports = {
             ]);
             return result;
         },
+        /**
+         * @author Aurian Durand
+         */
         topHashtagsFromAllDepartementsInOneRegion: async (parent, args, context) => {
             let result = await Tweets.aggregate([
                 {
@@ -194,6 +242,9 @@ module.exports = {
             ]);
             return result;
         },
+        /**
+         * @author Aurian Durand
+         */
         topHashtagsFromAllCitiesInOneDepartement: async (parent, args, context) => {
             let result = await Tweets.aggregate([
                 {
