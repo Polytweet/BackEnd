@@ -120,6 +120,9 @@ const typeDefs = gql`
         topHashtagsFromAllRegions: [SetOfTopHastags]
         topHashtagsFromAllDepartementsInOneRegion(regCode: String): [SetOfTopHastags]
         topHashtagsFromAllCitiesInOneDepartement(depCode: String): [SetOfTopHastags]
+        tweetsPerDayFromAllRegions: [TopHashtag]
+        tweetsPerDayFromAllDepartements: [TopHashtag]
+        tweetsPerDayFromAllCitiesInOneDepartement(depCode: String): [TopHashtag]
         matchingTN: [MatchingTN]
     }`
 ;

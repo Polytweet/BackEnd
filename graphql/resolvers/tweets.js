@@ -271,5 +271,61 @@ module.exports = {
             ]);
             return result;
         },
+        tweetsPerDayFromAllRegions: async (parent, args, context) => {
+            let result = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                    }
+                },
+                { $unwind: "$hashtag" },
+                {
+                    $group: {
+                        _id: '$geoTweet.regionCode',
+                        count: { $sum: 1 }
+                    }
+                },
+            ]);
+            console.log(result)
+            return result;
+        },
+        tweetsPerDayFromAllDepartements: async (parent, args, context) => {
+            let result = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                    }
+                },
+                { $unwind: "$hashtag" },
+                {
+                    $group: {
+                        _id: '$geoTweet.departmentCode',
+                        count: { $sum: 1 }
+                    }
+                },
+            ]);
+            return result;
+        },
+        tweetsPerDayFromAllCitiesInOneDepartement: async (parent, args, context) => {
+            let result = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        'geoTweet.departmentCode': args.depCode,
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                    }
+                },
+                { $unwind: "$hashtag" },
+                {
+                    $group: {
+                        _id: '$geoTweet.cityCode',
+                        count: { $sum: 1 }
+                    }
+                },
+            ]);
+            return result;
+        },
     },
 };
