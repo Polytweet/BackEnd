@@ -149,8 +149,8 @@ module.exports = {
          */
         numberOfTweetsPerDayFromFrance: async (parent, args, context) => {
             return await Tweets.find({
-                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
-            }).countDocuments() / 7;
+                createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+            }).countDocuments();
         },
         /**
          * @author Aurian Durand
@@ -271,6 +271,9 @@ module.exports = {
             ]);
             return result;
         },
+        /**
+         * @author Aurian Durand
+         */
         tweetsPerDayFromAllRegions: async (parent, args, context) => {
             let result = await Tweets.aggregate([
                 {
@@ -290,6 +293,9 @@ module.exports = {
             console.log(result)
             return result;
         },
+        /**
+         * @author Aurian Durand
+         */
         tweetsPerDayFromAllDepartements: async (parent, args, context) => {
             let result = await Tweets.aggregate([
                 {
@@ -308,6 +314,9 @@ module.exports = {
             ]);
             return result;
         },
+        /**
+         * @author Aurian Durand
+         */
         tweetsPerDayFromAllCitiesInOneDepartement: async (parent, args, context) => {
             let result = await Tweets.aggregate([
                 {

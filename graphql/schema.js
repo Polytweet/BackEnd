@@ -88,6 +88,11 @@ const typeDefs = gql`
         count: Int
     }
 
+    type NumerOfTweetsFromZone {
+        _id: String!
+        count: Float
+    }
+
     type HashtagFromSet {
         hashtag: String
         count: Int
@@ -120,9 +125,9 @@ const typeDefs = gql`
         topHashtagsFromAllRegions: [SetOfTopHastags]
         topHashtagsFromAllDepartementsInOneRegion(regCode: String): [SetOfTopHastags]
         topHashtagsFromAllCitiesInOneDepartement(depCode: String): [SetOfTopHastags]
-        tweetsPerDayFromAllRegions: [TopHashtag]
-        tweetsPerDayFromAllDepartements: [TopHashtag]
-        tweetsPerDayFromAllCitiesInOneDepartement(depCode: String): [TopHashtag]
+        tweetsPerDayFromAllRegions: [NumerOfTweetsFromZone]
+        tweetsPerDayFromAllDepartements: [NumerOfTweetsFromZone]
+        tweetsPerDayFromAllCitiesInOneDepartement(depCode: String): [NumerOfTweetsFromZone]
         matchingTN: [MatchingTN]
     }`
 ;
