@@ -60,6 +60,9 @@ const server = new ApolloServer({
     tweetsResolvers,
     communesResolvers
   ),
+  engine: {
+    apiKey: "service:polytweet:wPACq82ycD40Tw4olR39jQ",
+  }
 });
 
 server.applyMiddleware({ app });
