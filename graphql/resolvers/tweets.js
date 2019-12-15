@@ -193,7 +193,7 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -222,7 +222,7 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.regionCode': args.regCode,
-                        createdat: { $gt: new Date(Date.now() - 5 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -251,7 +251,7 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.departmentCode': args.depCode,
-                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -282,7 +282,6 @@ module.exports = {
                         createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
                     }
                 },
-                { $unwind: "$hashtag" },
                 {
                     $group: {
                         _id: '$geoTweet.regionCode',
@@ -304,7 +303,6 @@ module.exports = {
                         createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
                     }
                 },
-                { $unwind: "$hashtag" },
                 {
                     $group: {
                         _id: '$geoTweet.departmentCode',
@@ -326,7 +324,6 @@ module.exports = {
                         createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
                     }
                 },
-                { $unwind: "$hashtag" },
                 {
                     $group: {
                         _id: '$geoTweet.cityCode',
