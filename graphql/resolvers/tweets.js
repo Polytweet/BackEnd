@@ -149,8 +149,8 @@ module.exports = {
          */
         numberOfTweetsPerDayFromFrance: async (parent, args, context) => {
             return await Tweets.find({
-                createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
-            }).countDocuments();
+                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+            }).countDocuments() / 7;
         },
         /**
          * @author Aurian Durand
@@ -251,7 +251,7 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.departmentCode': args.depCode,
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -267,7 +267,7 @@ module.exports = {
                         hashtags: { $addToSet: { hashtag: '$_id.hashtag', count: '$count' } },
                         count: { $sum: 1 }
                     }
-                },
+                }
             ]);
             return result;
         },
@@ -279,7 +279,7 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
                     }
                 },
                 {
@@ -288,8 +288,13 @@ module.exports = {
                         count: { $sum: 1 }
                     }
                 },
+                {
+                    $project: {
+                        _id: 1,
+                        count: { $divide: [ "$count", 7 ] }
+                    }
+                }
             ]);
-            console.log(result)
             return result;
         },
         /**
@@ -300,7 +305,7 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
                     }
                 },
                 {
@@ -309,6 +314,12 @@ module.exports = {
                         count: { $sum: 1 }
                     }
                 },
+                {
+                    $project: {
+                        _id: 1,
+                        count: { $divide: [ "$count", 7 ] }
+                    }
+                }
             ]);
             return result;
         },
@@ -321,7 +332,7 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.departmentCode': args.depCode,
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
                     }
                 },
                 {
@@ -330,6 +341,12 @@ module.exports = {
                         count: { $sum: 1 }
                     }
                 },
+                {
+                    $project: {
+                        _id: 1,
+                        count: { $divide: [ "$count", 7 ] }
+                    }
+                }
             ]);
             return result;
         },
