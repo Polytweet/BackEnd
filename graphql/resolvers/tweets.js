@@ -1,6 +1,37 @@
 const Tweets = require('../../model/tweets');
 
+const { PubSub } = require('apollo-server');
+const pubsub = new PubSub();
+
+const TOTALNUMBEROFTWEETSUSEDBYPOLYTWEET = 'TOTALNUMBEROFTWEETSUSEDBYPOLYTWEET';
+const LAST10TWEETS = 'LAST10TWEETS';
+
+var schedule = require('node-schedule');
+
+/**
+ * this function publish the total tweets number to the totalNumberOfTweetsUsedByPolytweet subscription
+ * @author Aurian Durand
+ */
+schedule.scheduleJob('*/1 * * * * *', function(){
+    pubsub.publish(TOTALNUMBEROFTWEETSUSEDBYPOLYTWEET, { totalNumberOfTweetsUsedByPolytweet: Tweets.find().countDocuments() });
+});
+/**
+ * this function publish the last 10 tweets to the last10tweets subscription
+ * @author Aurian Durand
+ */
+schedule.scheduleJob('*/1 * * * * *', function(){
+    pubsub.publish(LAST10TWEETS, { last10tweets: Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(10) });
+});
+
 module.exports = {
+    Subscription: {
+        totalNumberOfTweetsUsedByPolytweet: {
+          subscribe: () => pubsub.asyncIterator([TOTALNUMBEROFTWEETSUSEDBYPOLYTWEET]),
+        },
+        last10tweets: {
+            subscribe: () => pubsub.asyncIterator([LAST10TWEETS]),
+          },
+    },
     Query: {
         /**
          * @author Aurian Durand
@@ -13,6 +44,12 @@ module.exports = {
          */
         tweetsFromFrance: async () => {
             return Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(1000);
+        },
+        /**
+         * @author Aurian Durand
+         */
+        last10tweets: async () => {
+            return Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(10);
         },
         /**
          * @author Aurian Durand

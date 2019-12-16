@@ -1,6 +1,7 @@
 // server imports 
 const { ApolloServer, gql } = require('apollo-server-express');
 const express = require('express');
+const http = require('http');
 
 // database import
 const mongoose = require('mongoose');
@@ -9,8 +10,6 @@ const mongoose = require('mongoose');
 // const news = require('./news')
 
 // const clearDB = require('./clearDB');
-
-
 
 // socket import
 // const socketio = require('socket.io')
@@ -67,6 +66,9 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
+
 // '* * * * * *' - runs every second
 // '*/5 * * * * *' - runs every 5 seconds
 // '10,20,30 * * * * *' - run at 10th, 20th and 30th second of every minute
@@ -92,7 +94,7 @@ server.applyMiddleware({ app });
 
 // connect to the mongodb database through mongoose and then start the server
 var db = mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-  app.listen({ port: 4000 }, () => {
+  httpServer.listen({ port: 4000 }, () => {
     console.log(`API ready at https://polytweet.fr/graphql`)
     console.log(`Client ready at https://polytweet.fr`)
   }

@@ -110,6 +110,7 @@ const typeDefs = gql`
         news: [News]
         tweets: [Tweet] @deprecated(reason: "Please use tweetsFromFrance instead")
         tweetsFromFrance: [Tweet]
+        last10tweets: [Tweet]
         tweetsFromCity(cityCode: String): [Tweet]
         tweetsFromDepartement(depCode: String): [Tweet]
         tweetsFromRegion(regCode: String): [Tweet]
@@ -129,7 +130,14 @@ const typeDefs = gql`
         tweetsPerDayFromAllDepartements: [NumerOfTweetsFromZone]
         tweetsPerDayFromAllCitiesInOneDepartement(depCode: String): [NumerOfTweetsFromZone]
         matchingTN: [MatchingTN]
-    }`
+    }
+    
+    type Subscription {
+        totalNumberOfTweetsUsedByPolytweet: Int
+        last10tweets: [Tweet]
+    }
+
+    `
 ;
 
 module.exports = typeDefs;
