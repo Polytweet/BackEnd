@@ -30,6 +30,7 @@ const typeDefs = gql`
         text: String
         createdat: Date
         checked: Boolean
+        newsAboutIt: [String]
     }
 
     type MatchingTN {

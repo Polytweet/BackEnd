@@ -39,6 +39,7 @@ module.exports = async function StartTweetSteam(boundingBox){
 }
 
 async function insertTweets(_hashtag, _text, _geoTweet) {
+    var newsAboutItEmpty = [];
     let tweets = new Tweets({
         hashtag : _hashtag,
         text : _text,
@@ -47,6 +48,7 @@ async function insertTweets(_hashtag, _text, _geoTweet) {
             cityCode : _geoTweet[1],
             departmentCode : _geoTweet[2],
             regionCode : _geoTweet[3],
+            newsAboutIt: newsAboutItEmpty
         }
     });
     console.log('\x1b[31m', _hashtag + ' -> ' + _text);
