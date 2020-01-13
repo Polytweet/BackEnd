@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const matchingDataV0 = require('./matchingDataV0');
 const matchingDataV1 = require('./matchingDataV1');
-const cleanDico = require('./cleanDico');
+// const cleanDico = require('./cleanDico');
 
 mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   //Version 0 un peu cassée
