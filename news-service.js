@@ -20,8 +20,8 @@ mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: tr
     //   console.log('Printing every 30s')
     // })
 
-    //0 0 * * * *
-    schedule.scheduleJob('*/10 * * * * *', function(){
+    // run the serice every 30 secondes
+    schedule.scheduleJob('*/30 * * * * *', function(){
       news();
     });
 

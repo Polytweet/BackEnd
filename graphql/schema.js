@@ -112,24 +112,25 @@ const typeDefs = gql`
         tweets: [Tweet] @deprecated(reason: "Please use tweetsFromFrance instead")
         tweetsFromFrance: [Tweet]
         last10tweets: [Tweet]
-        tweetsFromCity(cityCode: String): [Tweet]
-        tweetsFromDepartement(depCode: String): [Tweet]
-        tweetsFromRegion(regCode: String): [Tweet]
-        topHashtagsFromFrance: [TopHashtag]
-        topHashtagsFromCity(cityCode: String): [TopHashtag]
-        topHashtagsFromDepartement(depCode: String): [TopHashtag]
-        topHashtagsFromRegion(regCode: String): [TopHashtag]
-        numberOfTweetsPerDayFromFrance: Float
-        numberOfTweetsPerDayFromRegion(regCode: String): Float
-        numberOfTweetsPerDayFromDepartement(depCode: String): Float
-        numberOfTweetsPerDayFromCity(cityCode: String): Float
+        tweetsFromCity(cityCode: String, newsId: [String] = []): [Tweet]
+        tweetsFromDepartement(depCode: String, newsId: [String] = []): [Tweet]
+        tweetsFromRegion(regCode: String, newsId: [String] = []): [Tweet]
+        topHashtagsFromFrance(newsId: [String] = []): [TopHashtag]
+        topHashtagsFromCity(cityCode: String, newsId: [String] = []): [TopHashtag]
+        topHashtagsFromDepartement(depCode: String, newsId: [String] = []): [TopHashtag]
+        topHashtagsFromRegion(regCode: String, newsId: [String] = []): [TopHashtag]
+        numberOfTweetsPerDayFromFrance(newsId: [String] = []): Float
+        numberOfTweetsPerDayFromRegion(regCode: String, newsId: [String] = []): Float
+        numberOfTweetsPerDayFromDepartement(depCode: String, newsId: [String] = []): Float
+        numberOfTweetsPerDayFromCity(cityCode: String, newsId: [String] = []): Float
         totalNumberOfTweetsUsedByPolytweet: Int
-        topHashtagsFromAllRegions: [SetOfTopHastags]
-        topHashtagsFromAllDepartementsInOneRegion(regCode: String): [SetOfTopHastags]
-        topHashtagsFromAllCitiesInOneDepartement(depCode: String): [SetOfTopHastags]
-        tweetsPerDayFromAllRegions: [NumerOfTweetsFromZone]
-        tweetsPerDayFromAllDepartements: [NumerOfTweetsFromZone]
-        tweetsPerDayFromAllCitiesInOneDepartement(depCode: String): [NumerOfTweetsFromZone]
+        topHashtagsFromAllRegions(newsId: [String] = []): [SetOfTopHastags]
+        topHashtagsFromAllDepartements(newsId: [String] = []): [SetOfTopHastags]
+        topHashtagsFromAllDepartementsInOneRegion(regCode: String, newsId: [String] = []): [SetOfTopHastags]
+        topHashtagsFromAllCitiesInOneDepartement(depCode: String, newsId: [String] = []): [SetOfTopHastags]
+        tweetsPerDayFromAllRegions(newsId: [String] = []): [NumerOfTweetsFromZone]
+        tweetsPerDayFromAllDepartements(newsId: [String] = []): [NumerOfTweetsFromZone]
+        tweetsPerDayFromAllCitiesInOneDepartement(depCode: String, newsId: [String] = []): [NumerOfTweetsFromZone]
         matchingTN: [MatchingTN]
     }
     

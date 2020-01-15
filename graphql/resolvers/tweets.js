@@ -55,19 +55,28 @@ module.exports = {
          * @author Aurian Durand
          */
         tweetsFromCity: async (parent, args, context) => {
-            return Tweets.find({'geoTweet.cityCode': args.cityCode}).sort({createdat: -1}).limit(1000);
+            return Tweets.find({
+                    'geoTweet.cityCode': args.cityCode,
+                    $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                }).sort({createdat: -1}).limit(1000);
         },
         /**
          * @author Aurian Durand
          */
         tweetsFromDepartement: async (parent, args, context) => {
-            return Tweets.find({'geoTweet.departmentCode': args.depCode}).sort({createdat: -1}).limit(1000);
+            return Tweets.find({
+                'geoTweet.departmentCode': args.depCode,
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+            }).sort({createdat: -1}).limit(1000);
         },
         /**
          * @author Aurian Durand
          */
         tweetsFromRegion: async (parent, args, context) => {
-            return Tweets.find({'geoTweet.regionCode': args.regCode}).sort({createdat: -1}).limit(1000);
+            return Tweets.find({
+                'geoTweet.regionCode': args.regCode,
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+            }).sort({createdat: -1}).limit(1000);
         },
         /**
          * @author Aurian Durand
@@ -77,7 +86,8 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -105,7 +115,8 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.cityCode': args.cityCode,
-                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -134,7 +145,8 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.departmentCode': args.depCode,
-                        createdat: { $gt: new Date(Date.now() - 5 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 5 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -162,7 +174,8 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.regionCode': args.regCode,
-                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -186,7 +199,8 @@ module.exports = {
          */
         numberOfTweetsPerDayFromFrance: async (parent, args, context) => {
             return await Tweets.find({
-                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
             }).countDocuments() / 7;
         },
         /**
@@ -195,7 +209,8 @@ module.exports = {
         numberOfTweetsPerDayFromRegion: async (parent, args, context) => {
             return await Tweets.find({
                 'geoTweet.regionCode': args.regCode, 
-                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
             }).countDocuments() / 7;
         },
         /**
@@ -204,7 +219,8 @@ module.exports = {
         numberOfTweetsPerDayFromDepartement: async (parent, args, context) => {
             return await Tweets.find({
                 'geoTweet.departmentCode': args.depCode, 
-                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
             }).countDocuments() / 7;
         },
         /**
@@ -213,7 +229,8 @@ module.exports = {
         numberOfTweetsPerDayFromCity: async (parent, args, context) => {
             return await Tweets.find({
                 'geoTweet.cityCode': args.cityCode, 
-                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
             }).countDocuments() / 7;
         },
         /**
@@ -230,7 +247,8 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -253,13 +271,43 @@ module.exports = {
         /**
          * @author Aurian Durand
          */
+        topHashtagsFromAllDepartements: async (parent, args, context) => {
+            let result = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                { $unwind: "$hashtag" },
+                {
+                    $group: {
+                        _id: { hashtag: '$hashtag', departmentCode: '$geoTweet.departmentCode' },
+                        count: { $sum: 1 }
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$_id.departmentCode',
+                        hashtags: { $addToSet: { hashtag: '$_id.hashtag', count: '$count' } },
+                        count: { $sum: 1 }
+                    }
+                },
+            ]);
+            return result;
+        },
+        /**
+         * @author Aurian Durand
+         */
         topHashtagsFromAllDepartementsInOneRegion: async (parent, args, context) => {
             let result = await Tweets.aggregate([
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.regionCode': args.regCode,
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -288,7 +336,8 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.departmentCode': args.depCode,
-                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 { $unwind: "$hashtag" },
@@ -316,7 +365,8 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 {
@@ -342,7 +392,8 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 {
@@ -369,7 +420,8 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.departmentCode': args.depCode,
-                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) }
+                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
                 {
