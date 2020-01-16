@@ -9,9 +9,9 @@
     "api": "nodemon api-service.js",
     "news": "nodemon news-service.js",
     "tweets": "nodemon tweets-service.js",
-    "analysis": "nodemon analysis-service.js",
+    "analysis": "nodemon --max-old-space-size=8192 analysis-service.js",
     "history": "nodemon history-service.js",
-    "all": "nodemon api-service.js & nodemon news-service.js & nodemon tweets-service.js &nodemon analysis-service.js & nodemon history-service.js"
+    "all": "nodemon api-service.js & nodemon news-service.js & nodemon tweets-service.js & nodemon --max-old-space-size=8192 analysis-service.js & nodemon history-service.js"
   },
   "keywords": [],
   "author": "",

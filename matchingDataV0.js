@@ -6,13 +6,20 @@ const News = require('./model/news');
 const Tweet = require('./model/tweets');
 const MatchingTN = require('./model/matchingTN');
 
-module.exports = async function matchingData() {
+module.exports = async function matchingDataV0() {
+    matchingV0();
+}
+
+async function matchingV0()
+{
+    // VERSION 0 du MATCHING
+
     let arrayOfNews = await getTitleNews();
     let arrayOfTweets = await getTweets({checked:false});
+    // console.log(arrayOfNews);
+    arrayOfTweets.forEach(async function (tw) {      
 
-
-    arrayOfTweets.forEach(async function (tw) {
-        let ressemblance = getSimilarity(tw['content'], arrayOfNews);
+        let ressemblance = getSimilarity_0(tw['content'], arrayOfNews);
         await Tweet.updateOne(
             { _id: tw['id'] },
             {
@@ -25,16 +32,30 @@ module.exports = async function matchingData() {
         let t = await Tweet.findById(tw['id']);
         let n = await News.findById(ressemblance['news']['id']);
 
+        // console.log(t['newsAboutIt'].length);
 
 
         if (ressemblance['pourcentage'] > 40)
         {
             console.log("Le tweet \n" + t + "\n ressemble à " + ressemblance['pourcentage'] + "% à la news \n" + n);
-            await MatchingTN.save({ news: ressemblance['news']['id'], tweet: tw['id'], percentage: ressemblance['pourcentage'], algorithmUsed : "ALGO_0"});
+            // await MatchingTN.save({ news: ressemblance['news']['id'], tweet: tw['id'], percentage: ressemblance['pourcentage'], algorithmUsed : "ALGO_0"});
+            
+            let listNewsAboutit = t['newsAboutIt'];
+            listNewsAboutit[listNewsAboutit.length] = ressemblance['news']['id'];
+            
+            await Tweet.updateOne(
+                { _id: tw['id'] },
+                {
+                    $set: {
+                        newsAboutIt: listNewsAboutit
+                    }
+                }
+            )
+       
+       
         }
     });
 }
-
 
 function generateSimilarity(text1, text2) {
     list1 = text1.split(' '); //news
@@ -53,7 +74,7 @@ function generateSimilarity(text1, text2) {
     return numberWordsFound / total;
 }
 
-function getSimilarity(tw, ar) {
+function getSimilarity_0(tw, ar) {
 
     let similariteMax = 0;
     let newsSimilaire = null;

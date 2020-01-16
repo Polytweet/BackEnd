@@ -17,7 +17,8 @@ const tweets = new Schema({
     createdat: {
         type: Date,
         default: Date.now
-    }
+    },
+    newsAboutIt: [String]
 });
 
 module.exports = mongoose.model('Tweets', tweets);
