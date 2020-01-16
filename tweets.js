@@ -3,17 +3,14 @@ const https = require('https');
 const Tweets = require('./model/tweets.js');
 
 var T = new Twit({
-    consumer_key:         'D8xZV18oVSgrnP0gwcoBh7Kh4',
-    consumer_secret:      'KaSRPiyMlpwrM4jv4mpMZF6ricV5K3a9WxUi78jrAah2FczOjc',
+    consumer_key:         'MtA1xLH4rcBQVRmBgW42vTigv',
+    consumer_secret:      'V6qfPAMi5ydRGf7yuh7MIbd5dCwKHxkXr57zs6bepHb6lJMazM',
     access_token:         '890649688822644736-yqNjJl2pNdsYI9Juhbtwmcgu8ZINPsN',
     access_token_secret:  'eOM5zkghXueuDjwaHd6kjxcRb0DdS6rjV6HsG1PCvJltU',
   });
 
 module.exports = async function StartTweetSteam(boundingBox){
-    console.log("Tweet stream initialisation...");
     var stream = T.stream('statuses/filter', { locations: boundingBox } );
-    console.log("Tweet stream started");
-
     stream.on('tweet', function (tweet) {
         try {
             var city = tweet['place']['name'];
@@ -27,7 +24,7 @@ module.exports = async function StartTweetSteam(boundingBox){
             if(hashtagTab.length > 0){
                 callApiByCityName(city)
                 .then(function (response){
-                    if(response) {
+                    if(response){
                         insertTweets(hashtagTab, text, response);
                     }
                 })
@@ -42,7 +39,6 @@ module.exports = async function StartTweetSteam(boundingBox){
 }
 
 async function insertTweets(_hashtag, _text, _geoTweet) {
-
     let tweets = new Tweets({
         hashtag : _hashtag,
         text : _text,
@@ -62,7 +58,7 @@ async function insertTweets(_hashtag, _text, _geoTweet) {
 function callApiByCityName(cityName){
     return new Promise(function (resolve, reject){
         let data = '';
-        https.get('https://geo.api.gouv.fr/communes?nom=' + cityName + '&boost=population&limit=1', (resp) => {            
+        https.get('https://geo.api.gouv.fr/communes?nom=' + cityName + '&limit=1', (resp) => {            
             resp.on('data', (chunk) => {
                 data += chunk;
             });
