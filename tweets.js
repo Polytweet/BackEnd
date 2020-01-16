@@ -3,64 +3,58 @@ const https = require('https');
 const Tweets = require('./model/tweets.js');
 
 var T = new Twit({
-    consumer_key:         'MtA1xLH4rcBQVRmBgW42vTigv',
-    consumer_secret:      'V6qfPAMi5ydRGf7yuh7MIbd5dCwKHxkXr57zs6bepHb6lJMazM',
+    consumer_key:         'D8xZV18oVSgrnP0gwcoBh7Kh4',
+    consumer_secret:      'KaSRPiyMlpwrM4jv4mpMZF6ricV5K3a9WxUi78jrAah2FczOjc',
     access_token:         '890649688822644736-yqNjJl2pNdsYI9Juhbtwmcgu8ZINPsN',
     access_token_secret:  'eOM5zkghXueuDjwaHd6kjxcRb0DdS6rjV6HsG1PCvJltU',
   });
 
-module.exports = async function StartTweetSteam(boundingBox){
-    var stream = T.stream('statuses/filter', { locations: boundingBox } );
-    stream.on('tweet', function (tweet) {
-        try {
-            var city = tweet['place']['name'];
-            var text = tweet['text'];
-            var hashtagTab = [];
+module.exports = {
+    StartTweetStream: async function(boundingBox){
+        console.log("Tweet stream initialisation...");
+        var stream = T.stream('statuses/filter', { locations: boundingBox } );
+        console.log("Tweet stream started");
     
-            for (var i=0;i<tweet['entities']['hashtags'].length;i++) {
-                hashtagTab[i] = tweet['entities']['hashtags'][i]['text'];
-            }
-    
-            if(hashtagTab.length > 0){
-                callApiByCityName(city)
-                .then(function (response){
-                    if(response){
-                        insertTweets(hashtagTab, text, response);
-                    }
-                })
-                .catch(function (req){
-                    console.log(req);
-                })
-            }   
-        } catch (error) {
-            console.log(error);
-        }
-    });
-}
+        stream.on('tweet', function (tweet) {
+           onTweetReceived(tweet);
+        });
+    },
+    InsertTweet: function(tweet){
+        onTweetReceived(tweet);
+    }
+};
 
-async function insertTweets(_hashtag, _text, _geoTweet) {
-    var newsAboutItEmpty = [];
-    let tweets = new Tweets({
-        hashtag : _hashtag,
-        text : _text,
-        geoTweet : {
-            city : _geoTweet[0],
-            cityCode : _geoTweet[1],
-            departmentCode : _geoTweet[2],
-            regionCode : _geoTweet[3],
-            newsAboutIt: newsAboutItEmpty
-        }
-    });
-    console.log('\x1b[31m', _hashtag + ' -> ' + _text);
-    console.log('\x1b[34m', 'From -> ' + _geoTweet + '\x1b[0m\n');
+async function onTweetReceived(tweet)
+{
+    try {
+        var city = tweet['place']['name'];
+        var text = tweet['text'];
+        var hashtagTab = [];
 
-    await tweets.save();
+        for (var i=0;i<tweet['entities']['hashtags'].length;i++) {
+            hashtagTab[i] = tweet['entities']['hashtags'][i]['text'];
+        }
+
+        if(hashtagTab.length > 0){
+            callApiByCityName(city)
+            .then(function (response){
+                if(response) {
+                    insertTweets(hashtagTab, text, response);
+                }
+            })
+            .catch(function (req){
+                console.log(req);
+            })
+        }   
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function callApiByCityName(cityName){
     return new Promise(function (resolve, reject){
         let data = '';
-        https.get('https://geo.api.gouv.fr/communes?nom=' + cityName + '&limit=1', (resp) => {            
+        https.get('https://geo.api.gouv.fr/communes?nom=' + cityName + '&boost=population&limit=1', (resp) => {            
             resp.on('data', (chunk) => {
                 data += chunk;
             });
@@ -85,5 +79,25 @@ function callApiByCityName(cityName){
             }).on("error", (error) => {
                 reject(error);
         });
-    })
+    });
+}
+
+function insertTweets(_hashtag, _text, _geoTweet) {
+    var newsAboutItEmpty = [];
+    let tweets = new Tweets({
+        hashtag : _hashtag,
+        text : _text,
+        geoTweet : {
+            city : _geoTweet[0],
+            cityCode : _geoTweet[1],
+            departmentCode : _geoTweet[2],
+            regionCode : _geoTweet[3],
+            newsAboutIt: newsAboutItEmpty
+        }
+    });
+
+    console.log('\x1b[31m', _hashtag + ' -> ' + _text);
+    console.log('\x1b[34m', 'From -> ' + _geoTweet + '\x1b[0m\n');
+
+    tweets.save();
 }
