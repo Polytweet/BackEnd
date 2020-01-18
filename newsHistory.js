@@ -1,8 +1,8 @@
 const News = require('./model/news.js');
 const NewsObso = require('./model/newsObso.js');
 
-module.exports = async function StartHistory(refreshTime, obsoleteTime){
-    let myVar = setInterval(function(){ startObsoleteFilter(obsoleteTime) }, refreshTime * (1000*60*60*24));
+module.exports = async function StartHistory(obsoleteTime){
+    startObsoleteFilter(obsoleteTime);
 }
 
 function startObsoleteFilter(obsoleteTime){
@@ -15,6 +15,7 @@ function startObsoleteFilter(obsoleteTime){
 
             for(var i = 0; i < result.length; i++){
                 let difference = (currentData - result[i]['date']) / (1000*60*60*24);// En jour
+                console.log(difference);
                 if(difference > obsoleteTime){
                     insertObsoleteNews(result[i]);
                     deleteNews(result[i].id);

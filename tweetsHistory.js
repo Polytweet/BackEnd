@@ -1,8 +1,8 @@
 const Tweets = require('./model/tweets.js');
 const TweetsObso = require('./model/tweetsObso.js');
 
-module.exports = async function StartHistory(refreshTime, obsoleteTime){
-    let myVar = setInterval(function(){ startObsoleteFilter(obsoleteTime) }, refreshTime * (1000*60*60*24));
+module.exports = async function StartHistory( obsoleteTime){
+    startObsoleteFilter(obsoleteTime);
 }
 
 function startObsoleteFilter(obsoleteTime){
@@ -14,7 +14,7 @@ function startObsoleteFilter(obsoleteTime){
             const currentData = new Date();
 
             for(var i = 0; i < result.length; i++){
-                let difference = (currentData - result[i]['createdat']) / (1000*60*60*24);// En minutes
+                let difference = (currentData - result[i]['createdat']) / (1000*60*60*24);// En jour
                 if(difference > obsoleteTime){
                     insertObsoleteTweets(result[i]);
                     deleteTweet(result[i].id);

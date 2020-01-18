@@ -1,0 +1,22 @@
+[
+    { 
+        "_id":"5e230d26bcc465062cb907fb",
+        "source":"Www.lci.fr",
+        "author":"Antoine Rondel",
+        "title":"VIDEO - La soirée du couple Macron au théâtre perturbée par des manifestants : ce qu'il s'est passé | LCI - LCI",
+        "description":"SOIRÉE AGITÉE - La représentation de \"La Mouche\" au théâtre des Bouffes du Nord, à laquelle assistait le couple présidentiel, a été perturbée par la présence de quelques dizaines d'opposants à Emmanuel Macron à l'extérieur de l'établissement. Récit d'une soir…",
+        "url":"https://www.lci.fr/politique/video-la-soiree-du-couple-emmanuel-macron-au-theatre-des-bouffes-du-nord-perturbee-par-des-manifestants-ce-qu-il-s-est-passe-2143084.html",
+        "date":"2020-01-18T12:10:00.000Z",
+        "content":"La mobilisation contre la réforme des retraites a atteint un nouveau point de tension dans la soirée du vendredi 17 janvier. Plusieurs dizaines d'opposants au président de la République se sont réunis devant le théâtre des Bouffes du Nord, dans le 10e arrondi… [+3573 chars]"
+    },
+     { 
+        "_id":"5e230d26bcc465062cb907fc",
+        "source":"Tkt",
+        "author":"Mika",
+        "title":"Exemple news",
+        "description":"Ceci est un template de news",
+        "url":"https://www.lci.fr/politique/video-la-soiree-du-couple-emmanuel-macron-au-theatre-des-bouffes-du-nord-perturbee-par-des-manifestants-ce-qu-il-s-est-passe-2143084.html",
+        "date":"2020-01-15T12:10:00.000Z",
+        "content":"........"
+    }
+]
