@@ -49,7 +49,7 @@ module.exports = {
          * @author Aurian Durand
          */
         last10tweets: async () => {
-            return Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(10);
+            return Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(12);
         },
         /**
          * @author Aurian Durand
@@ -382,6 +382,7 @@ module.exports = {
                     }
                 }
             ]);
+            // console.log(result)
             return result;
         },
         /**

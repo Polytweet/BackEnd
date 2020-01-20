@@ -90,7 +90,7 @@ const typeDefs = gql`
     }
 
     type NumerOfTweetsFromZone {
-        _id: String!
+        _id: String
         count: Float
     }
 
