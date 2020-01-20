@@ -8,7 +8,7 @@ mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: tr
   var newsHistory = require("./newsHistory.js");
 
     //Toute les 2s
-    schedule.scheduleJob('*/2 * * * * *', function(){
+    schedule.scheduleJob('0 0 0 * * *', function(){
       let obsoleteTimeTweets = 1;//En jours
       tweetsHistory(obsoleteTimeTweets);
     
