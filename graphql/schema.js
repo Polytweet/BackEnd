@@ -14,6 +14,7 @@ const typeDefs = gql`
         url: String,
         date: Date,
         content: String
+        tweetsAboutIt: [String]
     }
 
     type GeoTweet {
