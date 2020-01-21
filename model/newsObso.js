@@ -9,6 +9,7 @@ const newsObso = new Schema({
     url: String,
     date: Date,
     content: String,
+    tweetsAboutIt: [String]
 });
 
 module.exports = mongoose.model('ObsoleteNews', newsObso);

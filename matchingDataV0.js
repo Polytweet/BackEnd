@@ -64,6 +64,13 @@ async function matchingV0() {
                     }
                 )
 
+                await News.updateOne(
+                    { _id: n._id },
+                    {
+                        $push: { tweetsAboutIt: tw['id'] }
+                    }
+                )
+
             }
        
         }
