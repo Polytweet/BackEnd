@@ -53,6 +53,8 @@ async function matchingV0() {
             //         }
             //     }
             // )
+
+            let listTweetsAboutIt = n.tweetsAboutIt;
             
             // si le tweets ne contient pas déjà la news dans newsAboutIt, alors l'ajouter
             if(!listNewsAboutit.includes(ressemblance['news']['id'])) {
@@ -63,6 +65,17 @@ async function matchingV0() {
                         $push: { newsAboutIt: ressemblance['news']['id'] }
                     }
                 )
+
+                // await News.updateOne(
+                //     { _id: n._id },
+                //     {
+                //         $push: { tweetsAboutIt: tw['id'] }
+                //     }
+                // )
+
+            }
+
+            if(!listTweetsAboutIt.includes(tw['id'])) {
 
                 await News.updateOne(
                     { _id: n._id },
