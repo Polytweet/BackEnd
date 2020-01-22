@@ -206,6 +206,21 @@ module.exports = {
         /**
          * @author Aurian Durand
          */
+        differenceOfNumberOfTweetsPerDayFromFrance: async (parent, args, context) => {
+            let last24h = await Tweets.find({
+                createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+            }).countDocuments();
+            let last48h = await Tweets.find({
+                createdat: { $gt: new Date(Date.now() - 2 * 24*60*60 * 1000) },
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+            }).countDocuments();
+            let last48hMinusLast24h = last48h - last24h
+            return - (1 - (last24h / (last48hMinusLast24h))) * 100
+        },
+        /**
+         * @author Aurian Durand
+         */
         numberOfTweetsPerDayFromRegion: async (parent, args, context) => {
             return await Tweets.find({
                 'geoTweet.regionCode': args.regCode, 

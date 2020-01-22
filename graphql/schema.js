@@ -121,6 +121,7 @@ const typeDefs = gql`
         topHashtagsFromDepartement(depCode: String, newsId: [String] = []): [TopHashtag]
         topHashtagsFromRegion(regCode: String, newsId: [String] = []): [TopHashtag]
         numberOfTweetsPerDayFromFrance(newsId: [String] = []): Float
+        differenceOfNumberOfTweetsPerDayFromFrance(newsId: [String] = []): Float
         numberOfTweetsPerDayFromRegion(regCode: String, newsId: [String] = []): Float
         numberOfTweetsPerDayFromDepartement(depCode: String, newsId: [String] = []): Float
         numberOfTweetsPerDayFromCity(cityCode: String, newsId: [String] = []): Float
