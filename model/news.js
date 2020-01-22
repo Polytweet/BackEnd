@@ -10,7 +10,10 @@ const news = new Schema({
     url: String,
     date: Date,
     content: String,
-    tweetsAboutIt: [String]
+    tweetsAboutIt: {
+        type: [String],
+        default: []
+    }
 });
 
 module.exports = mongoose.model('News', news);
