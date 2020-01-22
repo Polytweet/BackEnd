@@ -34,14 +34,6 @@ const typeDefs = gql`
         newsAboutIt: [String]
     }
 
-    type MatchingTN {
-        _id: String
-        news: String
-        tweet: String
-        percentage: Float
-        algorithmUsed: String
-    }
-
     type GeoShape {
         _type: String
         coordinates: [ [ [ Float ] ] ]
@@ -104,6 +96,11 @@ const typeDefs = gql`
         hashtags: [HashtagFromSet]
         count: Int
     }
+
+    type PercentageOfChange {
+        zoneNumber: String
+        percentage: Float
+    }
     
     type Query {
         communes(code_dept:String, nom_dept:String): [Communes]
@@ -121,7 +118,6 @@ const typeDefs = gql`
         topHashtagsFromDepartement(depCode: String, newsId: [String] = []): [TopHashtag]
         topHashtagsFromRegion(regCode: String, newsId: [String] = []): [TopHashtag]
         numberOfTweetsPerDayFromFrance(newsId: [String] = []): Float
-        differenceOfNumberOfTweetsPerDayFromFrance(newsId: [String] = []): Float
         numberOfTweetsPerDayFromRegion(regCode: String, newsId: [String] = []): Float
         numberOfTweetsPerDayFromDepartement(depCode: String, newsId: [String] = []): Float
         numberOfTweetsPerDayFromCity(cityCode: String, newsId: [String] = []): Float
@@ -133,7 +129,11 @@ const typeDefs = gql`
         tweetsPerDayFromAllRegions(newsId: [String] = []): [NumerOfTweetsFromZone]
         tweetsPerDayFromAllDepartements(newsId: [String] = []): [NumerOfTweetsFromZone]
         tweetsPerDayFromAllCitiesInOneDepartement(depCode: String, newsId: [String] = []): [NumerOfTweetsFromZone]
-        matchingTN: [MatchingTN]
+        differenceOfNumberOfTweetsPerDayFromFrance(newsId: [String] = []): Float
+        differenceOfNumberOfTweetsPerDayFromAllRegions(newsId: [String] = []): [PercentageOfChange]
+        differenceOfNumberOfTweetsPerDayFromAllDepartements(newsId: [String] = []): [PercentageOfChange]
+        differenceOfNumberOfTweetsPerDayFromAllDepartementsInOneRegion(regCode: String, newsId: [String] = []): [PercentageOfChange]
+        differenceOfNumberOfTweetsPerDayFromAllCitiesInOneDepartement(depCode: String, newsId: [String] = []): [PercentageOfChange]
     }
     
     type Subscription {
