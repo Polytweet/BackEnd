@@ -134,7 +134,7 @@ async function getTweets() {
     let toReturn = new Array();
     // let TweetsInDB = await Tweet.find({});
     // let TweetsInDB = await Tweet.find({ checked: false }) 
-    let TweetsInDB = await Tweet.find({ createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) } })
+    let TweetsInDB = await Tweet.find({ createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) } })
     // console.log(TweetsInDB);
     let counter = 0;
 
@@ -169,7 +169,7 @@ async function getTitleNews() {
         'a', 'as', 'avons', 'avez', 'ont', 'suis', 'es', 'est', 'sommes', 'êtes', 'sont', 'il', 'elle', 'figaro',
         'lci', 'ils', 'elles', 'on', 'an', 'au', 'aux', 'bfmtv.com'];
     // let newsInDB = await News.find({}); 
-    let newsInDB = await News.find({ date: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) } });
+    let newsInDB = await News.find({ date: { $gt: new Date(Date.now() - 24*60*60 * 1000) } });
     //console.log(newsInDB);
     let toReturn = new Array();
     let counterToReturn = 0;
