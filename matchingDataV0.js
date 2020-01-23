@@ -10,13 +10,15 @@ module.exports = async function matchingDataV0() {
     matchingV0();
 }
 
-async function matchingV0()
-{
+async function matchingV0() {
     // VERSION 0 du MATCHING
+
+    console.log('START VERSION 0 du MATCHING')
 
     let arrayOfNews = await getTitleNews();
     let arrayOfTweets = await getTweets({checked:false});
-    // console.log(arrayOfNews);
+    console.log(arrayOfNews.length);
+    console.log(arrayOfTweets.length);
     arrayOfTweets.forEach(async function (tw) {      
 
         let ressemblance = getSimilarity_0(tw['content'], arrayOfNews);
@@ -41,20 +43,52 @@ async function matchingV0()
             // await MatchingTN.save({ news: ressemblance['news']['id'], tweet: tw['id'], percentage: ressemblance['pourcentage'], algorithmUsed : "ALGO_0"});
             
             let listNewsAboutit = t['newsAboutIt'];
-            listNewsAboutit[listNewsAboutit.length] = ressemblance['news']['id'];
+            // listNewsAboutit[listNewsAboutit.length] = ressemblance['news']['id'];
             
-            await Tweet.updateOne(
-                { _id: tw['id'] },
-                {
-                    $set: {
-                        newsAboutIt: listNewsAboutit
+            // await Tweet.updateOne(
+            //     { _id: tw['id'] },
+            //     {
+            //         $set: {
+            //             newsAboutIt: listNewsAboutit
+            //         }
+            //     }
+            // )
+
+            let listTweetsAboutIt = n.tweetsAboutIt;
+            
+            // si le tweets ne contient pas déjà la news dans newsAboutIt, alors l'ajouter
+            if(!listNewsAboutit.includes(ressemblance['news']['id'])) {
+
+                await Tweet.updateOne(
+                    { _id: tw['id'] },
+                    {
+                        $push: { newsAboutIt: ressemblance['news']['id'] }
                     }
-                }
-            )
-       
+                )
+
+                // await News.updateOne(
+                //     { _id: n._id },
+                //     {
+                //         $push: { tweetsAboutIt: tw['id'] }
+                //     }
+                // )
+
+            }
+
+            if(!listTweetsAboutIt.includes(tw['id'])) {
+
+                await News.updateOne(
+                    { _id: n._id },
+                    {
+                        $push: { tweetsAboutIt: tw['id'] }
+                    }
+                )
+
+            }
        
         }
     });
+
 }
 
 function generateSimilarity(text1, text2) {
@@ -99,7 +133,8 @@ function getSimilarity_0(tw, ar) {
 async function getTweets() {
     let toReturn = new Array();
     // let TweetsInDB = await Tweet.find({});
-    let TweetsInDB = await Tweet.find({ checked: false });
+    // let TweetsInDB = await Tweet.find({ checked: false }) 
+    let TweetsInDB = await Tweet.find({ createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) } })
     // console.log(TweetsInDB);
     let counter = 0;
 
@@ -133,7 +168,8 @@ async function getTitleNews() {
         'leur', 'leurs', 'en', 'par', 'ne', 'dans', 'pour', 'quel', 'quelle', 'quels', 'quelles', 'qui', 'quoi',
         'a', 'as', 'avons', 'avez', 'ont', 'suis', 'es', 'est', 'sommes', 'êtes', 'sont', 'il', 'elle', 'figaro',
         'lci', 'ils', 'elles', 'on', 'an', 'au', 'aux', 'bfmtv.com'];
-    let newsInDB = await News.find({});
+    // let newsInDB = await News.find({}); 
+    let newsInDB = await News.find({ date: { $gt: new Date(Date.now() - 24*60*60 * 1000) } });
     //console.log(newsInDB);
     let toReturn = new Array();
     let counterToReturn = 0;

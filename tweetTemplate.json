@@ -1,0 +1,34 @@
+[
+    {
+        "text": "Marseille est vraiment sympa !",
+        "place": {   
+            "name":"Marseille"
+        },
+        "entities": {
+          "hashtags": [    
+              {
+                "text": "J'aime Marseille"
+              },
+              {
+                "text": "I love Marseille"
+              }
+          ]
+        }
+    },
+    {
+      "text": "Lyon est vraiment sympa !",
+      "place": {   
+          "name":"Lyon"
+      },
+      "entities": {
+        "hashtags": [    
+            {
+              "text": "J'aime Lyon"
+            },
+            {
+              "text": "I love Lyon"
+            }
+        ]
+      }
+  }
+]

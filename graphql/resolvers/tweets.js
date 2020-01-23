@@ -49,7 +49,7 @@ module.exports = {
          * @author Aurian Durand
          */
         last10tweets: async () => {
-            return Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(10);
+            return Tweets.find({createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) }}).sort({createdat: -1}).limit(12);
         },
         /**
          * @author Aurian Durand
@@ -382,6 +382,7 @@ module.exports = {
                     }
                 }
             ]);
+            // console.log(result)
             return result;
         },
         /**
@@ -438,6 +439,213 @@ module.exports = {
                 }
             ]);
             return result;
+        },
+        /**
+         * @author Aurian Durand
+         */
+        differenceOfNumberOfTweetsPerDayFromFrance: async (parent, args, context) => {
+            let last24h = await Tweets.find({
+                createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+            }).countDocuments();
+            let last48h = await Tweets.find({
+                createdat: { $gt: new Date(Date.now() - 2 * 24*60*60 * 1000) },
+                $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+            }).countDocuments();
+            let last48hMinusLast24h = last48h - last24h
+            return - (1 - (last24h / (last48hMinusLast24h))) * 100
+        },
+        /**
+         * @author Aurian Durand
+         */
+        differenceOfNumberOfTweetsPerDayFromAllRegions: async (parent, args, context) => {
+            let last24h = await Tweets.aggregate([
+                {
+                    $match: {
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$geoTweet.regionCode',
+                        count: { $sum: 1 }
+                    }
+                },
+            ]);
+            let last48h = await Tweets.aggregate([
+                {
+                    $match: {
+                        createdat: { $gt: new Date(Date.now() - 2 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$geoTweet.regionCode',
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+            let toReturn = [];
+            last24h.forEach(_24h => {
+                last48h.forEach(_48h => {
+                    if(_24h._id == _48h._id) {
+                        toReturn.push({
+                            zoneNumber: _24h._id,
+                            percentage: - ( 1 - ( _24h.count / _48h.count ) ) * 100
+                        })
+                    }
+                })
+            })
+            return toReturn
+        },
+        /**
+         * @author Aurian Durand
+         */
+        differenceOfNumberOfTweetsPerDayFromAllDepartements: async (parent, args, context) => {
+            let last24h = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$geoTweet.departmentCode',
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+            let last48h = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        createdat: { $gt: new Date(Date.now() - 2 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$geoTweet.departmentCode',
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+            let toReturn = [];
+            last24h.forEach(_24h => {
+                last48h.forEach(_48h => {
+                    if(_24h._id == _48h._id) {
+                        toReturn.push({
+                            zoneNumber: _24h._id,
+                            percentage: - ( 1 - ( _24h.count / _48h.count ) ) * 100
+                        })
+                    }
+                })
+            })
+            return toReturn
+        },
+        /**
+         * @author Aurian Durand
+         */
+        differenceOfNumberOfTweetsPerDayFromAllCitiesInOneDepartement: async (parent, args, context) => {
+            let last24h = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        'geoTweet.departmentCode': args.depCode,
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$geoTweet.cityCode',
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+            let last48h = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        'geoTweet.departmentCode': args.depCode,
+                        createdat: { $gt: new Date(Date.now() - 2 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$geoTweet.cityCode',
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+            let toReturn = [];
+            last24h.forEach(_24h => {
+                last48h.forEach(_48h => {
+                    if(_24h._id == _48h._id) {
+                        toReturn.push({
+                            zoneNumber: _24h._id,
+                            percentage: - ( 1 - ( _24h.count / _48h.count ) ) * 100
+                        })
+                    }
+                })
+            })
+            return toReturn
+        },
+        /**
+         * @author Aurian Durand
+         */
+        differenceOfNumberOfTweetsPerDayFromAllDepartementsInOneRegion: async (parent, args, context) => {
+            let last24h = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        'geoTweet.regionCode': args.regCode,
+                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                { $unwind: "$hashtag" },
+                {
+                    $group: {
+                        _id: '$geoTweet.departmentCode',
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+            let last48h = await Tweets.aggregate([
+                {
+                    $match: {
+                        hashtag: { $not: {$size: 0} },
+                        'geoTweet.regionCode': args.regCode,
+                        createdat: { $gt: new Date(Date.now() - 2 * 24*60*60 * 1000) },
+                        $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
+                    }
+                },
+                { $unwind: "$hashtag" },
+                {
+                    $group: {
+                        _id: '$geoTweet.departmentCode',
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+            let toReturn = [];
+            last24h.forEach(_24h => {
+                last48h.forEach(_48h => {
+                    if(_24h._id == _48h._id) {
+                        toReturn.push({
+                            zoneNumber: _24h._id,
+                            percentage: - ( 1 - ( _24h.count / _48h.count ) ) * 100
+                        })
+                    }
+                })
+            })
+            return toReturn
         },
     },
 };

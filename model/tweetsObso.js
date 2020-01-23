@@ -16,7 +16,8 @@ const tweetsObso = new Schema({
     },
     createdat: {
         type: Date,
-    }
+    },
+    newsAboutIt: [String]
 });
 
 module.exports = mongoose.model('ObsoleteTweets', tweetsObso);

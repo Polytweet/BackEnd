@@ -14,6 +14,7 @@ const typeDefs = gql`
         url: String,
         date: Date,
         content: String
+        tweetsAboutIt: [String]
     }
 
     type GeoTweet {
@@ -31,14 +32,6 @@ const typeDefs = gql`
         createdat: Date
         checked: Boolean
         newsAboutIt: [String]
-    }
-
-    type MatchingTN {
-        _id: String
-        news: String
-        tweet: String
-        percentage: Float
-        algorithmUsed: String
     }
 
     type GeoShape {
@@ -90,7 +83,7 @@ const typeDefs = gql`
     }
 
     type NumerOfTweetsFromZone {
-        _id: String!
+        _id: String
         count: Float
     }
 
@@ -102,6 +95,11 @@ const typeDefs = gql`
         _id: String
         hashtags: [HashtagFromSet]
         count: Int
+    }
+
+    type PercentageOfChange {
+        zoneNumber: String
+        percentage: Float
     }
     
     type Query {
@@ -131,7 +129,11 @@ const typeDefs = gql`
         tweetsPerDayFromAllRegions(newsId: [String] = []): [NumerOfTweetsFromZone]
         tweetsPerDayFromAllDepartements(newsId: [String] = []): [NumerOfTweetsFromZone]
         tweetsPerDayFromAllCitiesInOneDepartement(depCode: String, newsId: [String] = []): [NumerOfTweetsFromZone]
-        matchingTN: [MatchingTN]
+        differenceOfNumberOfTweetsPerDayFromFrance(newsId: [String] = []): Float
+        differenceOfNumberOfTweetsPerDayFromAllRegions(newsId: [String] = []): [PercentageOfChange]
+        differenceOfNumberOfTweetsPerDayFromAllDepartements(newsId: [String] = []): [PercentageOfChange]
+        differenceOfNumberOfTweetsPerDayFromAllDepartementsInOneRegion(regCode: String, newsId: [String] = []): [PercentageOfChange]
+        differenceOfNumberOfTweetsPerDayFromAllCitiesInOneDepartement(depCode: String, newsId: [String] = []): [PercentageOfChange]
     }
     
     type Subscription {
