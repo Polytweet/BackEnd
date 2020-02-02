@@ -15,7 +15,7 @@ function startObsoleteFilter(obsoleteTime){
 
             for(var i = 0; i < result.length; i++){
                 let difference = (currentData - result[i]['date']) / (1000*60*60*24);// En jour
-                console.log(difference);
+                //console.log(difference);
                 if(difference > obsoleteTime){
                     insertObsoleteNews(result[i]);
                     deleteNews(result[i].id);
