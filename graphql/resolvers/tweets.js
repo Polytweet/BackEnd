@@ -453,6 +453,7 @@ module.exports = {
                 $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
             }).countDocuments();
             let last48hMinusLast24h = last48h - last24h
+            // console.log("last24h: "+last24h+" last48hMinusLast24h: "+last48hMinusLast24h)
             return - (1 - (last24h / (last48hMinusLast24h))) * 100
         },
         /**
@@ -491,13 +492,27 @@ module.exports = {
             last24h.forEach(_24h => {
                 last48h.forEach(_48h => {
                     if(_24h._id == _48h._id) {
-                        toReturn.push({
-                            zoneNumber: _24h._id,
-                            percentage: - ( 1 - ( _24h.count / _48h.count ) ) * 100
-                        })
+                        if(_24h.count == _48h.count && (_24h.count > 1 && _48h.count > 1)) {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: 100
+                            })
+                        } else if (_24h.count > 1 && _48h.count > 1) {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: - ( 1 - ( _24h.count / (_48h.count - _24h.count) ) ) * 100
+                            })
+                        } else {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: 0
+                            })
+                        }
                     }
                 })
             })
+            // console.log(last24h)
+            // console.log(last48h)
             return toReturn
         },
         /**
@@ -538,10 +553,22 @@ module.exports = {
             last24h.forEach(_24h => {
                 last48h.forEach(_48h => {
                     if(_24h._id == _48h._id) {
-                        toReturn.push({
-                            zoneNumber: _24h._id,
-                            percentage: - ( 1 - ( _24h.count / _48h.count ) ) * 100
-                        })
+                        if(_24h.count == _48h.count && (_24h.count > 1 && _48h.count > 1)) {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: 100
+                            })
+                        } else if (_24h.count > 1 && _48h.count > 1) {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: - ( 1 - ( _24h.count / (_48h.count - _24h.count) ) ) * 100
+                            })
+                        } else {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: 0
+                            })
+                        }
                     }
                 })
             })
@@ -587,10 +614,22 @@ module.exports = {
             last24h.forEach(_24h => {
                 last48h.forEach(_48h => {
                     if(_24h._id == _48h._id) {
-                        toReturn.push({
-                            zoneNumber: _24h._id,
-                            percentage: - ( 1 - ( _24h.count / _48h.count ) ) * 100
-                        })
+                        if(_24h.count == _48h.count && (_24h.count > 1 && _48h.count > 1)) {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: 100
+                            })
+                        } else if (_24h.count > 1 && _48h.count > 1) {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: - ( 1 - ( _24h.count / (_48h.count - _24h.count) ) ) * 100
+                            })
+                        } else {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: 0
+                            })
+                        }
                     }
                 })
             })
@@ -638,10 +677,22 @@ module.exports = {
             last24h.forEach(_24h => {
                 last48h.forEach(_48h => {
                     if(_24h._id == _48h._id) {
-                        toReturn.push({
-                            zoneNumber: _24h._id,
-                            percentage: - ( 1 - ( _24h.count / _48h.count ) ) * 100
-                        })
+                        if(_24h.count == _48h.count && (_24h.count > 1 && _48h.count > 1)) {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: 100
+                            })
+                        } else if (_24h.count > 1 && _48h.count > 1) {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: - ( 1 - ( _24h.count / (_48h.count - _24h.count) ) ) * 100
+                            })
+                        } else {
+                            toReturn.push({
+                                zoneNumber: _24h._id,
+                                percentage: 0
+                            })
+                        }
                     }
                 })
             })
