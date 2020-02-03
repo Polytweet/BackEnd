@@ -18,7 +18,7 @@ function startGenration(){
   const JSONnews = JSON.parse(fs.readFileSync('newsTemplate.json'));
 
   //Toute les 2s
-  schedule.scheduleJob('*/10 * * * *', function(){
+  schedule.scheduleJob('*/1 * * * * *', function(){
     tweets.InsertTweet(JSONtweets[getRandomInt(JSONtweets.length)]);
 
     InsertNews(JSONnews[getRandomInt(JSONnews.length)]);
