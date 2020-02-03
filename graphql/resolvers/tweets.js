@@ -86,7 +86,7 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) },
                         $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
@@ -115,7 +115,7 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.cityCode': args.cityCode,
-                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) },
                         $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
@@ -145,7 +145,7 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.departmentCode': args.depCode,
-                        createdat: { $gt: new Date(Date.now() - 5 * 24*60*60 * 1000) },
+                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) },
                         $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
@@ -247,7 +247,7 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) },
                         $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
@@ -276,7 +276,7 @@ module.exports = {
                 {
                     $match: {
                         hashtag: { $not: {$size: 0} },
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) },
                         $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
@@ -306,7 +306,7 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.regionCode': args.regCode,
-                        createdat: { $gt: new Date(Date.now() - 24*60*60 * 1000) },
+                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) },
                         $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
@@ -336,7 +336,7 @@ module.exports = {
                     $match: {
                         hashtag: { $not: {$size: 0} },
                         'geoTweet.departmentCode': args.depCode,
-                        createdat: { $gt: new Date(Date.now() - 7 * 24*60*60 * 1000) },
+                        createdat: { $gt: new Date(Date.now() - 3 * 24*60*60 * 1000) },
                         $or: [ { newsAboutIt: { $in: [args.newsId] }} , { 'args.newsId': {$size: 0} } ]
                     }
                 },
