@@ -6,7 +6,7 @@ module.exports = {
          * @author Aurian Durand
          */
         news: async () => {
-            return News.find().sort({date: -1}).limit(1000);
+            return News.find({ tweetsAboutIt: { $exists: true, $not: {$size: 0} } }).sort({date: -1}).limit(1000);
         },
     },
 };
