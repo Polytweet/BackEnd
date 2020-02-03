@@ -15,9 +15,7 @@ function startObsoleteFilter(obsoleteTime){
 
             for(var i = 0; i < result.length; i++){
                 let difference = (currentData - result[i]['createdat']) / (1000*60*60*24);// En jour
-                //console.log(difference);
                 if(difference > obsoleteTime){
-                    //console.log('moved');
                     insertObsoleteTweets(result[i]);
                     deleteTweet(result[i].id);
                 }
