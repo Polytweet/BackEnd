@@ -54,7 +54,8 @@ async function matchingV1() {
 
     arrayOfNews.forEach(async function (element)
         {
-            // console.log(listTweetInNews[element['id']])
+            console.log(element['id'])
+
             await News.updateOne(
                 { _id: element['id']},
                 {

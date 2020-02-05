@@ -11,9 +11,9 @@ mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: tr
   //Version 0 un peu cassée
   // matchingDataV0();  
   // run the serice every 10 minutes
-  schedule.scheduleJob('*/5 * * * *', function(){
-    preparationData();
-  });
+  // schedule.scheduleJob('*/5 * * * *', function(){
+  //   preparationData();
+  // });
 
   
   //Version 1 avec utilisation de l'API sans traitement préalable sur les textes

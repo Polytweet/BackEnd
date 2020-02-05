@@ -14,14 +14,27 @@ const Determinant = require('./model/Words/determinant');
 const Verb = require('./model/Words/verbs');
 const ProperNoun = require('./model/Words/properNoun')
 const Pronoun = require('./model/Words/pronoun');
+const Tweet = require('./model/tweets')
+const News = require('./model/news')
 
 
 module.exports = async function cleanDico() {
-    // let verb = new Noun({ value:'comédienne' });
+
+    let tweets = await News.find();
+    // console.log(tweets)
+    tweets.forEach(element => {
+        if (element['tweetsAboutIt'].length != 0)
+        {
+            console.log(element)
+        }
+    });
+    // let verb = new ProperNoun({ value:'Frexit' });
     // await verb.save();  
     // console.log('end')  
-    // console.log(await ProperNoun.find({value : "féminicide"}))
-    // ProperNoun.findByIdAndRemove({ _id: '5e380d96ccccb21f943c3cab' }, { useFindAndModify: false }, function (err) {
+    // // console.log(await Determinant.find({value : "des"}))
+    // let r = await Noun.find({value : 'Coronavirus'})
+    // console.log(r)
+    // Noun.findByIdAndRemove({ _id: '5e076817c4b0b5456c51359c' }, { useFindAndModify: false }, function (err) {
     //     if (err) throw err;
     // });   
 }
