@@ -18,54 +18,47 @@ async function matchingV1() {
     let arrayOfNews = await getNews();
     let arrayOfTweets = await getTweets();
     let listTweetInNews = new Array();
-    
 
-    arrayOfTweets.forEach(async function (tw) {  
 
-        let listNews = new Array(); 
+    arrayOfTweets.forEach(async function (tw) {
 
-       arrayOfNews.forEach(async function (ne)
-       {
-           if (listTweetInNews[ne['id']] == undefined)
-           {
+        let listNews = new Array();
+
+        arrayOfNews.forEach(async function (ne) {
+            //    console.log(ne['id'])
+            if (listTweetInNews[ne['id']] == undefined) {
                 listTweetInNews[ne['id']] = ne['tweetsAboutIt'];
-           }
-        //    console.log('hola1')
-            if(getSimilarity(tw['content'], ne) == true)
-            {
+            }
+            //    console.log('hola1')
+            if (getSimilarity(tw['content'], ne) == true) {
                 listNews[listNews.length] = ne['id'];
-                if (!listTweetInNews[ne['id']].includes(tw['id']))
-                {
+                if (!listTweetInNews[ne['id']].includes(tw['id'])) {
                     listTweetInNews[ne['id']][listTweetInNews[ne['id']].length] = tw['id'];
                 }
-                
+
             }
-       });
-       await Tweet.updateOne(
-        { _id: tw['id'] },
-        {
-            $set: {
-                checked: true,
-                newsAboutIt : listNews
-            }
-        }
-    ) 
+        });
+        var newvaluesT = { $set: { newsAboutIt: listNews, checked: true } };
+        var myqueryT = { _id: tw['id'] };
+        await Tweet.updateOne(myqueryT, newvaluesT, function (err, res) {
+            if (err) throw err;
+        });
+        // console.log(tw['id'])
     });
 
-    arrayOfNews.forEach(async function (element)
-        {
-            console.log(element['id'])
+    arrayOfNews.forEach(async function (element) {
+        if (listTweetInNews[element['id']].length > 0) {
+            // console.log(element['id'])
+        }
 
-            await News.updateOne(
-                { _id: element['id']},
-                {
-                    $set: {
-                        tweetsAboutIt : listTweetInNews[element['id']]
-                    }
-                }
-            )
-        })
-        
+
+        var newvalues = { $set: { tweetsAboutIt: listTweetInNews[element['id']] } };
+        var myquery = { _id: element['id'] };
+        await News.updateOne(myquery, newvalues, function (err, res) {
+            if (err) throw err;
+        });
+    })
+
     console.log('END')
 }
 
@@ -87,94 +80,73 @@ function generateSimilarity(ne, tw) {
 }
 
 
-function getSimilarity(tw, ne)
-{
+function getSimilarity(tw, ne) {
     let counterProperNoun = 0;
     let listProperNoun = new Array();
     let toReturn = false;
-    ne.grammarList.forEach(g =>
-    {
-        if (g == "ProperNoun")
-        {
+    ne.grammarList.forEach(g => {
+        if (g == "ProperNoun") {
             counterProperNoun++;
             listProperNoun[listProperNoun.length] = ne.wordList[ne.grammarList.indexOf(g)]
         }
     });
 
-    if (counterProperNoun >= 2)
-    {
+    if (counterProperNoun >= 2) {
         let counterProperNounFound = 0;
-        listProperNoun.forEach(pn =>
-        {
-            if (tw.indexOf(pn) != -1)
-            {
+        listProperNoun.forEach(pn => {
+            if (tw.indexOf(pn) != -1) {
                 counterProperNounFound++;
             }
-            else
-            {
+            else {
                 let toLowerCaseProperNoun = pn.toLowerCase();
-                if (tw.indexOf(toLowerCaseProperNoun) != -1)
-                {
+                if (tw.indexOf(toLowerCaseProperNoun) != -1) {
                     counterProperNounFound++;
                 }
-                else
-                {
+                else {
                     toLowerCaseProperNoun = toLowerCaseProperNoun.trim();
                     let toLowerCaseProperNoun_2 = "";
                     let size = toLowerCaseProperNoun.length;
-                    for (let i = 0 ; i < size ; i++)
-                    {
-                        if (toLowerCaseProperNoun.charAt(i) != " ")
-                        {
+                    for (let i = 0; i < size; i++) {
+                        if (toLowerCaseProperNoun.charAt(i) != " ") {
                             toLowerCaseProperNoun_2 += toLowerCaseProperNoun.charAt(i);
                         }
                     }
-                    if (tw.indexOf(toLowerCaseProperNoun_2) != -1)
-                    {
+                    if (tw.indexOf(toLowerCaseProperNoun_2) != -1) {
                         counterProperNounFound++;
                     }
                 }
             }
         });
-        if (((counterProperNoun >= 2) && (counterProperNounFound + (1/2)*counterProperNoun >= counterProperNoun)))
-        {
+        if (((counterProperNoun >= 2) && (counterProperNounFound + (1 / 2) * counterProperNoun >= counterProperNoun))) {
             // console.log("Trouvé : " + counterProperNounFound)
             // console.log("Total : " + counterProperNoun )
             // console.log(counterProperNounFound + " trouvé pour la news \n" + ne['content'] + "\n" +tw + "\n\n")
             toReturn = true;
         }
-        else
-        {
-            toReturn = getSimilarityPart2(ne,tw);
-        }             
+        else {
+            toReturn = getSimilarityPart2(ne, tw);
+        }
     }
-    else
-    {
-        toReturn = getSimilarityPart2(ne,tw);
-    }   
-        return toReturn;
+    else {
+        toReturn = getSimilarityPart2(ne, tw);
+    }
+    return toReturn;
 }
 
-async function getSimilarityPart2(ne,tw)
-{
+async function getSimilarityPart2(ne, tw) {
     toReturn = false;
     let counter = 0;
-    for (let i = 0; i < ne.wordList.length; i++)
-    {
+    for (let i = 0; i < ne.wordList.length; i++) {
         let n = ne.wordList[i]
-        if (tw.includes(n.toLowerCase()))
-        {
+        if (tw.includes(n.toLowerCase())) {
             counter++;
         }
-        else
-        {
-            if (ne.grammarList[i].length != 0 && ne.grammarList.includes('Verb'))
-            {
-                let reserarchTemp = await Verb.find({infinitive : ne.wordList[i]});
+        else {
+            if (ne.grammarList[i].length != 0 && ne.grammarList.includes('Verb')) {
+                let reserarchTemp = await Verb.find({ infinitive: ne.wordList[i] });
                 // console.log(reserarchTemp)
                 reserarchTemp.forEach(element => {
-                    if (tw.includes(element))
-                    {
+                    if (tw.includes(element)) {
                         counter++;
                     }
                 });
@@ -182,16 +154,15 @@ async function getSimilarityPart2(ne,tw)
         }
     }
 
-        // if (counter*100/ne.wordList.length > 10)
-        // {
-        //     console.log(counter*100/ne.wordList.length)
-        // }
-        
-        if (counter*100/ne.wordList.length > 30)
-        {
-            // console.log("la news \n" + ne['content'] + "\nle tweet \n" +tw + "\n\n")  
-            toReturn = true;              
-        }
+    // if (counter*100/ne.wordList.length > 10)
+    // {
+    //     console.log(counter*100/ne.wordList.length)
+    // }
+
+    if (counter * 100 / ne.wordList.length > 30) {
+        // console.log("la news \n" + ne['content'] + "\nle tweet \n" +tw + "\n\n")  
+        toReturn = true;
+    }
     return toReturn;
 }
 
@@ -235,7 +206,7 @@ async function getTweets() {
         let words = (element['text'].toLowerCase()).split(' ');
 
         words.forEach(function (word) {
-            toReturn[counter]['content'] += word.trim()+ ' ';
+            toReturn[counter]['content'] += word.trim() + ' ';
         });
 
         element['hashtag'].forEach(function (hash) {
@@ -251,12 +222,10 @@ async function getTweets() {
 async function getNews() {
     let newsInDB = await News.find();
     let toReturn = new Array();
-    newsInDB.forEach(n =>
-        {
-            if (n.wordList.length != 0)
-            {
-                toReturn[toReturn.length] = n;
-            }
-        });
+    newsInDB.forEach(n => {
+        if (n.wordList.length != 0) {
+            toReturn[toReturn.length] = n;
+        }
+    });
     return toReturn;
 }
