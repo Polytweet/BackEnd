@@ -38,9 +38,7 @@ Dictionary = class Dictionary {
             async_result['listAdverbs'] = await loadAdverb();
             async_result['listNoun'] = await loadNoun();
             async_result['listProperNoun'] = await loadProperNoun();
-            async_result['listPrefix'] = await loadPrefix();
             async_result['listDeterminant'] = await loadDeterminant();
-            async_result['listEnglishWord'] = await loadEnglishWord();
             async_result['listPronoun'] = await loadPronoun();
             return new Dictionary(async_result);
         }
@@ -58,23 +56,24 @@ Dictionary = class Dictionary {
             });
             return toReturn;        
         }
-    // async constructor()
-    // {
-    //     this.listVerbs = loadVerbs();
-    //     this.listAdverbs = loadAdverb();
-    //     this.listNoun = loadNoun();
-    //     this.listProperNoun = loadProperNoun();
-    //     this.listPrefix = loadPrefix();
-    //     this.listDeterminant = loadDeterminant();
-    //     this.listEnglishWord = loadEnglishWord();
-    // }
 
+        getInfinitive(val)
+        {
+            let index = this.getVerbs().indexOf(val);
+            if (index != - 1)
+            {
+                return(this.listVerbs[index]['infinitive']);
+            }
+            else
+            {
+                return val;
+            }
+        }
 }
 
 async function loadVerbs()
 {
     let result = await Verb.find();
-    let toReturn = new Array()
     return result;
 }
 

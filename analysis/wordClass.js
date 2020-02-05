@@ -136,10 +136,6 @@ WordClass = class WordClass {
         {
             this.grammar[this.grammar.length] = 'Noun'
         }
-        if (dictionary.listEnglishWord.includes(val))
-        {
-            this.grammar[this.grammar.length] = 'EnglishWord'
-        }
         if (dictionary.listDeterminant.includes(val))
         {
             this.grammar[this.grammar.length] = 'Determinant'
@@ -164,6 +160,14 @@ WordClass = class WordClass {
         this.grammar[this.grammar.length] = newGrammar;
     }
 
+    resolveVerbs(dictionary)
+    {
+        if (this.grammar.length == 1 && this.grammar.includes("Verb"))
+        {
+            this.value = dictionary.getInfinitive(this.value);
+        }
+    }
+
     resolveGramar()
     {
         if (this.grammar.length == 2 && this.grammar.includes("Pronoun") && this.grammar.includes("Determinant"))
@@ -179,6 +183,32 @@ WordClass = class WordClass {
                 let t = new Array();
                 t[0] ="Pronoun";
                 this.grammar = t;                
+            }
+        }
+        else if (this.grammar.length == 2 && this.grammar.includes("Noun") && this.grammar.includes("Determinant"))
+        {
+            let t = new Array();
+            t[0] ="Determinant";
+            this.grammar = t;             
+        }
+        else if (this.grammar.length == 2 && this.grammar.includes("Verbs") && this.grammar.includes("Noun"))
+        {
+            if (this.suivant.getGrammar().length == 1 && this.suivant.getGrammar().includes("Verbs")
+            || (this.precedent.getGrammar().length == 1 && this.precedent.getGrammar().includes("Verbs")))
+            {
+                let t = new Array();
+                t[0] ="Verbs";
+                this.grammar = t;                
+            }
+            
+        }
+        else if (this.grammar.length == 0)
+        {
+            if (this.value.charCodeAt(0) >= 65 && this.value.charCodeAt(0) <= 90 && (this.precedent != null || this.suivant.getGrammar()[0] == 'ProperNoun'))
+            {
+                let t = new Array();
+                t[0] ="ProperNoun";
+                this.grammar = t;                   
             }
         }
     }
