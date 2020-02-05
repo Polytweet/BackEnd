@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 var schedule = require('node-schedule');
-const matchingDataV1 = require('./matchingDataV1');
+const matchingDataV1 = require('./analysis/matchingDataV1');
 
 mongoose.connect(`mongodb://localhost/polytweet-database`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => { 
 

@@ -47,9 +47,9 @@ async function matchingV1() {
     });
 
     arrayOfNews.forEach(async function (element) {
-        if (listTweetInNews[element['id']].length > 0) {
-            // console.log(element['id'])
-        }
+        // if (listTweetInNews[element['id']].length > 0) {
+        //     // console.log(element['id'])
+        // }
 
 
         var newvalues = { $set: { tweetsAboutIt: listTweetInNews[element['id']] } };
@@ -193,7 +193,7 @@ async function getTweets() {
     let toReturn = new Array();
     // let TweetsInDB = await Tweet.find({});
     // let TweetsInDB = await Tweet.find({ checked: false }) 
-    let TweetsInDB = await Tweet.find().limit(1000)
+    let TweetsInDB = await Tweet.find({ createdat: { $gt: new Date(Date.now() - 60*60 * 1000) } }); // la dernière heure
     // console.log(TweetsInDB);
     let counter = 0;
 
@@ -220,7 +220,7 @@ async function getTweets() {
 }
 
 async function getNews() {
-    let newsInDB = await News.find();
+    let newsInDB = await News.find({ date: { $gt: new Date(Date.now() - 24*60*60 * 1000) } });
     let toReturn = new Array();
     newsInDB.forEach(n => {
         if (n.wordList.length != 0) {
