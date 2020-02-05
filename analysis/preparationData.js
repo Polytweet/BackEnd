@@ -10,7 +10,7 @@ const WordClass = require('../analysis/wordClass')
 
 module.exports = async function constructSentence() {
     var dictionary = await Dictionary.build();
-    let news = await News.find({ wordList: [], grammarList: [] }).limit(5)
+    let news = await News.find({ wordList: [], grammarList: [], date: { $gt: new Date(Date.now() - 24*60*60 * 1000) } }).sort({date: -1}).limit(5)
     if (news != undefined && news != null  && news != []) {
         news.forEach(newsToAnalize => {
             // console.log(newsToAnalize)
